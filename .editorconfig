@@ -1,0 +1,14 @@
+# Top-most EditorConfig file
+root = true
+
+# Defaults
+[*]
+charset = utf-8
+indent_style = tab
+trim_trailing_whitespace = true
+insert_final_newline = true
+# Unix-style newlines
+end_of_line = lf
+
+[*.pug]
+trim_trailing_whitespace = false

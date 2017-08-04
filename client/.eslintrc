@@ -1,0 +1,19 @@
+{
+	"extends": [
+		"plugin:import/errors",
+		"plugin:import/warnings"
+	],
+	"env": {
+    "browser": true
+  },
+  "globals": {
+    "DEVMODE": false
+  },
+	"settings": {
+		"import/resolver": {
+			"webpack": {
+				"config": "./build/webpack.development.config.js"
+			}
+		}
+	}
+}

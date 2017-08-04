@@ -1,0 +1,11 @@
+# npm
+node_modules/
+
+# Generated files
+/server/static/dist/**/*
+!/server/static/dist/.gitkeep
+./stats.json
+
+# Misc
+.DS_Store
+.env

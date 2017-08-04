@@ -1,0 +1,40 @@
+if !title
+	- title = 'CTF Pro'
+if !desc
+	- desc = 'CTF Pro - an open source project.'
+
+doctype html
+html(lang='en')
+	head
+		title= title
+
+		meta(name='description' content=desc)
+
+		meta(charset='utf-8')
+		meta(http-equiv='x-ua-compatible' content='ie=edge')
+		meta(name='viewport' content='width=device-width, initial-scale=1')
+
+		link(href='/static/humans.txt' rel='author' type='text/plain')
+		link(href='/static/img/meta/favicon.png' rel='icon')
+
+		//- Load web fonts here
+		if process.env.DEV_NETWORK !== 'offline'
+			//-
+
+		//- Load bundled CSS if not in dev
+		if process.env.APP_ENV !== 'development'
+			link(href='/static/dist/style.css' rel='stylesheet' type='text/css')
+
+	body
+		block content
+
+		//- Load HMR JS & CSS if in dev, else just load bundled JS
+		if process.env.APP_ENV === 'development'
+			script(src='/dev-assets/bundle.js')
+		else
+			script(src='/static/dist/bundle.js')
+
+		block externalScripts
+			//- Load analytics or whatever else here
+			if process.env.DEV_NETWORK !== 'offline'
+				//-
