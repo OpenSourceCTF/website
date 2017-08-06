@@ -35,7 +35,7 @@ app.use(async (ctx, next) => {
 app.use(router.routes())
 
 // Start the server
-const webServerPort = process.env.WEB_SERVER_PORT
+const webServerPort = process.env.WEB_SERVER_PORT || 5000
 app.listen(webServerPort, err => {
 	if (err) console.error(err)
 	else console.log(`Server started: http://localhost:${webServerPort}/`)
