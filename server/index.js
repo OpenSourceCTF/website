@@ -35,7 +35,12 @@ app.use(async (ctx, next) => {
 app.use(router.routes())
 
 // Start the server
-const webServerPort = process.env.WEB_SERVER_PORT || 5000
+const webServerPort = process.env.WEB_SERVER_PORT
+
+if (!webServerPort) {
+	throw new Error('Could not parse web server port. Your environment variables may be misconfigured.')
+}
+
 app.listen(webServerPort, err => {
 	if (err) console.error(err)
 	else console.log(`Server started: http://localhost:${webServerPort}/`)
