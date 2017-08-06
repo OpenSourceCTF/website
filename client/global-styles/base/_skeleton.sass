@@ -1,0 +1,19 @@
+html
+	min-width: $min-site-width
+	min-height: 100vh
+	// Roughly target where the logo will usually be
+	background: radial-gradient(circle at calc(50vw - (#{$max-site-width} / 2)) 0, $color-secondary 0%, darken($color-secondary, 12%) 100%)
+	color: white
+
+a
+	outline: none
+	text-decoration: none
+	color: inherit
+
+	&:active
+	&:focus
+		outline: none
+
+ul
+	margin: 0
+	padding: 0

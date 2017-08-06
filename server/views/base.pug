@@ -27,6 +27,7 @@ html(lang='en')
 
 	body
 		block content
+			.js-app
 
 		//- Load HMR JS & CSS if in dev, else just load bundled JS
 		if process.env.APP_ENV === 'development'
@@ -34,7 +35,6 @@ html(lang='en')
 		else
 			script(src='/static/dist/bundle.js')
 
-		block externalScripts
-			//- Load analytics or whatever else here
-			if process.env.DEV_NETWORK !== 'offline'
-				//-
+		//- Load analytics or whatever else here
+		if process.env.DEV_NETWORK !== 'offline'
+			block externalScripts

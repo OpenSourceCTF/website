@@ -1,7 +1,11 @@
 {
+	"plugins": [
+		"react"
+	],
 	"extends": [
 		"plugin:import/errors",
-		"plugin:import/warnings"
+		"plugin:import/warnings",
+		"plugin:react/recommended"
 	],
 	"env": {
     "browser": true
@@ -15,5 +19,10 @@
 				"config": "./build/webpack.development.config.js"
 			}
 		}
+	},
+	"rules": {
+		// Enforce tabs instead of spaces
+		"react/jsx-indent": ["error", "tab"],
+		"react/jsx-indent-props": ["error", "tab"]
 	}
 }

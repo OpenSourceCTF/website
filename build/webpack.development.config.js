@@ -12,7 +12,10 @@ require('dotenv').config({ silent: true })
 const webPort = Number(process.env.WEB_SERVER_PORT) || 5000
 
 module.exports = merge(baseConfig, {
-	entry: './client/index.js',
+	entry: [
+		'react-hot-loader/patch',
+		'./client/index.js'
+	],
 	output: {
 		path: `${__dirname}/../server/static/dist`,
 		publicPath: '/dev-assets/'
@@ -63,7 +66,7 @@ module.exports = merge(baseConfig, {
 				exclude: /node_modules/
 			},
 			{
-				test: /\.sass$/,
+				test: /\.(sass|css)$/,
 				use: [
 					{
 						loader: 'style-loader',
@@ -75,7 +78,8 @@ module.exports = merge(baseConfig, {
 					{
 						loader: 'css-loader',
 						options: {
-							sourceMap: true
+							sourceMap: true,
+							modules: true
 						}
 					},
 					{

@@ -1,0 +1,61 @@
+.c-server-picker-select
+	min-width: 240px
+
+.c-server-picker-select__details
+	margin: ($baseline-spacing / 2) 0
+	text-align: center
+
+.c-server-picker
+	min-width: $min-site-width
+	width: 100vw
+	height: 100vh
+	display: flex
+	justify-content: center
+	align-items: center
+	position: fixed
+	top: 0
+	left: 0
+	background: transparent
+	transition: background .5s
+	pointer-events: none
+
+	&--active
+		background: transparentize($color-secondary, .05)
+		pointer-events: all
+
+.c-server-picker__inner
+	max-width: calc(100% - (#{$baseline-spacing} * 2))
+	max-height: calc(100% - (#{$baseline-spacing} * 2))
+	width: 700px
+	display: grid
+	grid-template-columns: 1fr
+	grid-column-gap: $baseline-spacing / 2
+	grid-row-gap: $baseline-spacing / 2
+	transform: translateY(100vh)
+	padding: $baseline-spacing
+	overflow: scroll
+	border-radius: 3px
+	opacity: 0
+	background: white
+	transition: transform .5s, opacity .75s
+
+	@media (min-width: 450px)
+		grid-template-columns: 1fr 1fr
+
+	@media (min-width: 600px)
+		grid-template-columns: 1fr 1fr 1fr
+
+	.c-server-picker--active &
+		transform: translateY(0)
+		opacity: 1
+
+.c-server-picker__item
+	padding: $baseline-spacing / 1.5
+	text-align: center
+	border-radius: 3px
+	background: $color-primary
+	cursor: pointer
+
+	header
+		margin: 0 0 5px
+		font-weight: bold

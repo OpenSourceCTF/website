@@ -40,7 +40,11 @@ module.exports = merge(baseConfig, {
 				use: ExtractTextPlugin.extract({
 					use: [
 						{
-							loader: 'css-loader'
+							loader: 'css-loader',
+							options: {
+								modules: true,
+								localIdentName: '[name]__[local]__[hash:base64:5]'
+							}
 						},
 						{
 							loader: 'postcss-loader',

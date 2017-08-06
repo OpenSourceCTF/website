@@ -1,0 +1,29 @@
+@import '../../global-styles/base/vars'
+
+.nav
+	height: $primary-nav-height
+	display: flex
+	justify-content: space-between
+	align-items: center
+	padding: ($baseline-spacing / 2) $baseline-spacing
+	background: rgba(0, 0, 0, .4)
+
+img.nav__logo
+	margin: 0
+	// TEMP: Until we have a proper logo that belongs here
+	filter: invert(100%)
+
+ul.nav__items
+	display: flex
+
+	li
+		font-weight: bold
+		cursor: pointer
+
+		&:hover,
+		&.item--active
+			color: $color-primary
+
+	// Due to wrapping anchor tags
+	> *:not(:first-child) li
+		margin-left: $baseline-spacing
