@@ -8,6 +8,8 @@ Browser support is the last 2 versions of modern browsers only (Chrome, Firefox,
 
 ## Quick Guide
 
+Ensure that your npm version is >= `5.3.0` and that your node.js version is >= `8.2.1`.
+
 In production, start the server with `npm run start` on by default port 5000.
 
 In development, start the server with `npm run start-dev`. This server will reload on change and as well as run alongside Webpack watch including HMR on the server port plus one. So, if your server port is 5000, you can access the dev site at `http://localhost:5001`. Note that with HMR you will see a FOUC on page load. Not to worry, this won't happen during production.
