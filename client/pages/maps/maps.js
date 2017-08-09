@@ -6,7 +6,9 @@ const MapsPage = () => (
 	<div>
 		<PrimaryNav />
 
-		<h1>maps</h1>
+		<main className="u-width-limiter">
+			<h1>maps</h1>
+		</main>
 	</div>
 )
 

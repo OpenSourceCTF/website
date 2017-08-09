@@ -1,28 +1,27 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+import { observer, inject } from 'mobx-react'
+import PropTypes from 'prop-types'
 
 import PlayPage from './play'
 
+@inject('matchmaking')
+@observer
 class PlayPageContainer extends Component {
-	state = {
-		testServers: []
-	}
-
-	constructor () {
-		super()
-
-		this.getServers()
-	}
-
-	getServers = async () => {
-		const testServers = await axios.get('/api/servers').then(res => res.data.servers)
-
-		this.setState({ testServers })
+	static propTypes = {
+		matchmaking: PropTypes.object.isRequired
 	}
 
 	render () {
+		const { matchmaking } = this.props
+
 		return (
-			<PlayPage servers={this.state.testServers} />
+			<PlayPage
+				servers={matchmaking.servers}
+				selectedServer={matchmaking.chosenServer}
+				selectServer={matchmaking.setServer}
+				competitive={matchmaking.competitive}
+				setCompetitive={matchmaking.setCompetitive}
+			/>
 		)
 	}
 }

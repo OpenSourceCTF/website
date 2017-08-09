@@ -6,7 +6,9 @@ const SearchAddonsPage = () => (
 	<div>
 		<AddonsNav />
 
-		<h1>addons/search</h1>
+		<main className="u-width-limiter">
+			<h1>addons/search</h1>
+		</main>
 	</div>
 )
 

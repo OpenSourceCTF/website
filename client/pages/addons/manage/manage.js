@@ -6,7 +6,9 @@ const ManageAddonsPage = () => (
 	<div>
 		<AddonsNav />
 
-		<h1>addons/manage</h1>
+		<main className="u-width-limiter">
+			<h1>addons/manage</h1>
+		</main>
 	</div>
 )
 

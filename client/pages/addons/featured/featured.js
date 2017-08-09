@@ -6,7 +6,9 @@ const FeaturedAddonsPage = () => (
 	<div>
 		<AddonsNav />
 
-		<h1>addons/featured</h1>
+		<main className="u-width-limiter">
+			<h1>addons/featured</h1>
+		</main>
 	</div>
 )
 

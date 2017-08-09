@@ -1,22 +1,20 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { PropTypes as MobxPropTypes } from 'mobx-react'
 
 import PrimaryNav from '../../components/nav-primary/'
 
 class PlayPage extends Component {
 	static propTypes = {
-		servers: PropTypes.array.isRequired
+		servers: MobxPropTypes.observableArrayOf(MobxPropTypes.observableObject).isRequired,
+		selectedServer: PropTypes.string.isRequired,
+		selectServer: PropTypes.func.isRequired,
+		competitive: PropTypes.bool.isRequired,
+		setCompetitive: PropTypes.func.isRequired
 	}
 
-	state = {
-		formSelectedServer: ''
-	}
-
-	handleChangeSelectedServer = evt => {
-		const formSelectedServer = evt.target.value
-
-		this.setState({ formSelectedServer })
-	}
+	handleChangeSelectedServer = evt => this.props.selectServer(evt.target.value)
+	handleToggleCompetitive = evt => this.props.setCompetitive(evt.target.checked)
 
 	render () {
 		const serversSortedByPing = this.props.servers.sort((a, b) => {
@@ -38,16 +36,28 @@ class PlayPage extends Component {
 			<div>
 				<PrimaryNav />
 
-				<h1>play</h1>
+				<main className="u-width-limiter">
+					<h1>play</h1>
 
-				<label htmlFor="server">Choose server:&nbsp;</label>
-				<select
-					value={this.state.formSelectedServer}
-					onChange={this.handleChangeSelectedServer}
-					name="server"
-				>
-					{renderedServerOpts}
-				</select>
+					<label htmlFor="server">Choose server: </label>
+					<select
+						value={this.props.selectedServer}
+						onChange={this.handleChangeSelectedServer}
+						name="server"
+					>
+						{renderedServerOpts}
+					</select>
+
+					<br />
+
+					<label htmlFor="competitive">Competitive?: </label>
+					<input
+						type="checkbox"
+						checked={this.props.competitive}
+						onChange={this.handleToggleCompetitive}
+						name="competitive"
+					/>
+				</main>
 			</div>
 		)
 	}
