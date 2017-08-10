@@ -6,7 +6,14 @@ The website for CTF Pro.
 
 Browser support is the last 2 versions of modern browsers only (Chrome, Firefox, Edge, Safari). This is reflected in the Babel and Autoprefixer (Webpack -> PostCSS) configs.
 
+# Prerequisites
+
+- Node >= 8.x
+- npm >= 5.x
+
 ## Quick Guide
+
+Copy `.env.example` to `.env` and edit as desired.
 
 In production, start the server with `npm run start` on by default port 5000.
 
