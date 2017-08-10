@@ -1,8 +1,8 @@
 {
-  "env": {
-    "node": true
-  },
-  "rules": {
-    "strict": "off"
-  }
+	"env": {
+		"node": true
+	},
+	"rules": {
+		"strict": "off"
+	}
 }

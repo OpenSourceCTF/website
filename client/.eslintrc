@@ -8,11 +8,11 @@
 		"plugin:react/recommended"
 	],
 	"env": {
-    "browser": true
-  },
-  "globals": {
-    "DEVMODE": false
-  },
+		"browser": true
+	},
+	"globals": {
+		"DEVMODE": false
+	},
 	"settings": {
 		"import/resolver": {
 			"webpack": {
