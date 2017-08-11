@@ -1,20 +1,34 @@
 @import '../../global-styles/base/vars'
 
-ul.nav
-	height: ($primary-nav-height / 3) * 2
+// Horizontal padding is implemented via margin on the children to workaround a
+// flex issue
+
+// This is arbitrary; a solution that doesn't require a breakpoint would be preferred
+$breakpoint: 400px
+
+.nav
 	display: flex
-	justify-content: center
 	align-items: center
+	padding: ($baseline-spacing / 1.5) 0
+	overflow: scroll
 	background: rgba(0, 0, 0, .25)
 
-	// Children may be wrapped in other elements
-	> *:not(.item):not(:first-child) .item,
-	> .item:not(:first-child)
-		margin-left: $baseline-spacing / 2
+	@media (min-width: $breakpoint)
+		justify-content: center
 
 .item
+	margin: 0 0 0 ($baseline-spacing / 2)
 	cursor: pointer
 
 	&:hover,
 	&--active
 		color: $color-primary
+
+	// As this element may be wrapped in semantic parent(s)
+	.nav > &:first-child,
+	.nav > *:first-child &
+		margin-left: $baseline-spacing
+
+	.nav > &:last-child,
+	.nav > *:last-child &
+		margin-right: $baseline-spacing

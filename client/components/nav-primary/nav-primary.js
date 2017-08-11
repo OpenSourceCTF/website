@@ -42,10 +42,10 @@ const Nav = ({ items, minimal = false }) => {
 
 	return (
 		<nav className={styles['nav']}>
-			<Link to="/" style={{ height: '100%' }}>
+			<Link to="/" className={styles['nav__logo-wrapper']}>
 				<img
 					src="/static/img/logo.png"
-					className={`u-image-restraints ${styles['nav__logo']}`}
+					className={styles['nav__logo']}
 				/>
 			</Link>
 
