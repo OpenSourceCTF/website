@@ -2,61 +2,71 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { PropTypes as MobxPropTypes } from 'mobx-react'
 
-import PrimaryNav from '../../components/nav-primary/'
+import PrimaryNav from '../../components/nav/primary/'
+import PrivateGameLobby from '../../components/lobby/private-game/'
+import PublicLGameobby from '../../components/lobby/public-game/'
+import { SecondaryNav, SecondaryNavItem } from '../../components/nav/secondary/'
+import ServerPicker from '../../components/server-picker/'
+
+import styles from './play.sass'
 
 class PlayPage extends Component {
 	static propTypes = {
 		servers: MobxPropTypes.observableArrayOf(MobxPropTypes.observableObject).isRequired,
 		selectedServer: PropTypes.string.isRequired,
 		selectServer: PropTypes.func.isRequired,
-		competitive: PropTypes.bool.isRequired,
-		setCompetitive: PropTypes.func.isRequired
+		gameIsPrivate: PropTypes.bool.isRequired,
+		setGamePublic: PropTypes.func.isRequired,
+		setGamePrivate: PropTypes.func.isRequired
 	}
 
-	handleChangeSelectedServer = evt => this.props.selectServer(evt.target.value)
-	handleToggleCompetitive = evt => this.props.setCompetitive(evt.target.checked)
-
 	render () {
-		const serversSortedByPing = this.props.servers.sort((a, b) => {
-			if (a.ping > b.ping) return 1
-			else if (a.ping < b.ping) return -1
-
-			return 0
-		})
-		const renderedServerOpts = serversSortedByPing.map(server => (
-			<option
-				key={server.name}
-				value={server.name}
-			>
-				{server.name} ({server.location}) (~{server.ping}ms)
-			</option>
-		))
+		const Lobby = this.props.gameIsPrivate ? PrivateGameLobby : PublicLGameobby
 
 		return (
-			<div>
-				<PrimaryNav />
+			<div className="u-page">
+				<div>
+					<PrimaryNav />
+
+					<SecondaryNav>
+						<SecondaryNavItem
+							onClick={this.props.setGamePublic}
+							isActive={!this.props.gameIsPrivate}
+						>
+							Public
+						</SecondaryNavItem>
+						<SecondaryNavItem
+							onClick={this.props.setGamePrivate}
+							isActive={this.props.gameIsPrivate}
+						>
+							Private
+						</SecondaryNavItem>
+					</SecondaryNav>
+				</div>
 
 				<main className="u-width-limiter">
-					<h1>play</h1>
+					<div className={styles['wrapper']}>
+						<div className="u-page">
+							<div>
+								<button
+									type="button"
+									className="c-btn c-btn--primary"
+								>
+									{this.props.gameIsPrivate ? 'Start Private Game' : 'Search for Public Game' }
+								</button>
+							</div>
 
-					<label htmlFor="server">Choose server: </label>
-					<select
-						value={this.props.selectedServer}
-						onChange={this.handleChangeSelectedServer}
-						name="server"
-					>
-						{renderedServerOpts}
-					</select>
+							<Lobby />
+						</div>
 
-					<br />
+						<aside className={styles['options']}>
+							<header>
+								<h1>Options</h1>
+							</header>
 
-					<label htmlFor="competitive">Competitive?: </label>
-					<input
-						type="checkbox"
-						checked={this.props.competitive}
-						onChange={this.handleToggleCompetitive}
-						name="competitive"
-					/>
+							<ServerPicker />
+						</aside>
+					</div>
 				</main>
 			</div>
 		)

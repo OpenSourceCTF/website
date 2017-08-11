@@ -1,4 +1,4 @@
-import { observable, action, runInAction } from 'mobx'
+import { observable, computed, action, runInAction } from 'mobx'
 import axios from 'axios'
 
 class MatchmakingStore {
@@ -9,11 +9,26 @@ class MatchmakingStore {
 		// Get last used matchmaking server from user's browser
 		const previousChosenServer = localStorage.getItem('matchmaking_server')
 		if (previousChosenServer) this.setServer(previousChosenServer)
+
+		// TEMP
+		;['teoretyczny', 'DwarfFortres', 'ElectroBall'].forEach(this.addPlayerToLobby)
+		this.changePlayerLobbyGroup('teoretyczny', 'team1')
 	}
 
 	@observable servers = []
 	@observable chosenServer = ''
-	@observable competitive = false
+	@observable privateGame = false
+	@observable publicLobby = false
+	@observable othersInLobby = [] // 'team1', 'team2', or 'spectators'
+
+	@computed get serversSortedByPing () {
+		return this.servers.sort((a, b) => {
+			if (a.ping > b.ping) return 1
+			else if (a.ping < b.ping) return -1
+
+			return 0
+		})
+	}
 
 	@action getServers = async () => {
 		const servers = await axios.get('/api/servers').then(res => res.data.servers)
@@ -30,8 +45,43 @@ class MatchmakingStore {
 		localStorage.setItem('matchmaking_server', server)
 	}
 
-	@action setCompetitive = competitive => {
-		this.competitive = competitive
+	@action setGamePublic = () => {
+		this.privateGame = false
+	}
+
+	@action setGamePrivate = () => {
+		this.privateGame = true
+	}
+
+	@action setLobbyPublic = () => {
+		this.publicLobby = true
+	}
+
+	@action setLobbyPrivate = () => {
+		this.publicLobby = false
+	}
+
+	@action addPlayerToLobby = player => {
+		this.othersInLobby.push({
+			name: player,
+			group: 'spectators'
+		})
+	}
+
+	@action changePlayerLobbyGroup = (playerName, group) => {
+		const playerIndex = this.othersInLobby.findIndex(player => player.name === playerName)
+
+		this.othersInLobby[playerIndex].group = group
+	}
+
+	@action removePlayerFromLobby = playerName => {
+		const playerIndex = this.othersInLobby.findIndex(player => player.name === playerName)
+
+		this.othersInLobby.splice(playerIndex, 1)
+	}
+
+	@action purgeLobby = () => {
+		this.othersInLobby = []
 	}
 }
 

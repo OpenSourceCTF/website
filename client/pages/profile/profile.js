@@ -1,6 +1,6 @@
 import React from 'react'
 
-import PrimaryNav from '../../components/nav-primary/'
+import PrimaryNav from '../../components/nav/primary/'
 
 const ProfilePage = () => (
 	<div>
