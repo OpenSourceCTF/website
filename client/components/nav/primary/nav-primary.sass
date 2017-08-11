@@ -1,6 +1,7 @@
-@import '../../global-styles/base/vars'
+@import '../../../global-styles/base/vars'
 
 .nav
+	max-width: 100vw
 	display: flex
 	justify-content: space-between
 	align-items: center
@@ -26,13 +27,10 @@
 	margin: 0 ($baseline-spacing / 2)
 
 	li
+		margin: 0 ($baseline-spacing / 2)
 		font-weight: bold
 		cursor: pointer
 
 		&:hover,
 		&.item--active
 			color: $color-primary
-
-	// Due to wrapping anchor tags
-	> *:not(:first-child) li
-		margin-left: $baseline-spacing

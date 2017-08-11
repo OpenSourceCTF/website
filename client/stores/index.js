@@ -1,7 +1,9 @@
 import matchmaking from './matchmaking'
+import user from './user'
 
 const stores = {
-	matchmaking
+	matchmaking,
+	user
 }
 
 export default stores

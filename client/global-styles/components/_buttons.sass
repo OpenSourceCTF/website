@@ -3,12 +3,20 @@
 	text-align: center
 	border: 2px solid transparent
 	font-weight: bold
+	outline: none
 	user-select: none
 	cursor: pointer
+	transition: transform .15s, background .15s
 
 	&--primary
 		border-radius: $baseline-spacing
 		background: $color-primary
 
+		&:hover
+			background: darken($color-primary, 5%)
+
 	&--secondary
 		border-color: $color-primary
+
+	&:active
+		transform: translateY(2px)

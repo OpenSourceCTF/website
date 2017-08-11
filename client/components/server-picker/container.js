@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
 import PropTypes from 'prop-types'
 
-import PlayPage from './play'
+import ServerPickerPage from './server-picker'
 
 @inject('matchmaking')
 @observer
-class PlayPageContainer extends Component {
+class ServerPickerPageContainer extends Component {
 	static propTypes = {
 		matchmaking: PropTypes.object.isRequired
 	}
@@ -15,16 +15,13 @@ class PlayPageContainer extends Component {
 		const { matchmaking } = this.props
 
 		return (
-			<PlayPage
-				servers={matchmaking.servers}
+			<ServerPickerPage
+				servers={matchmaking.serversSortedByPing}
 				selectedServer={matchmaking.chosenServer}
 				selectServer={matchmaking.setServer}
-				gameIsPrivate={matchmaking.privateGame}
-				setGamePublic={matchmaking.setGamePublic}
-				setGamePrivate={matchmaking.setGamePrivate}
 			/>
 		)
 	}
 }
 
-export default PlayPageContainer
+export default ServerPickerPageContainer
