@@ -1,4 +1,5 @@
 import { observable, computed, action, runInAction } from 'mobx'
+import { setter } from 'mobx-decorators'
 import axios from 'axios'
 
 class MatchmakingStore {
@@ -15,10 +16,16 @@ class MatchmakingStore {
 		this.changePlayerLobbyGroup('teoretyczny', 'blue')
 	}
 
+	@setter('setGamePublic', false)
+	@setter('setGamePrivate', true)
+	@observable privateGame = false
+
+	@setter('setLobbyPublic', true)
+	@setter('setLobbyPrivate', false)
+	@observable publicLobby = false
+
 	@observable servers = []
 	@observable chosenServer = ''
-	@observable privateGame = false
-	@observable publicLobby = false
 	@observable othersInLobby = [] // 'red', 'blue', or 'spectators'
 
 	@computed get serversSortedByPing () {
@@ -43,22 +50,6 @@ class MatchmakingStore {
 
 		// Persist chosen server to user's browser for future sessions
 		localStorage.setItem('matchmaking_server', server)
-	}
-
-	@action setGamePublic = () => {
-		this.privateGame = false
-	}
-
-	@action setGamePrivate = () => {
-		this.privateGame = true
-	}
-
-	@action setLobbyPublic = () => {
-		this.publicLobby = true
-	}
-
-	@action setLobbyPrivate = () => {
-		this.publicLobby = false
 	}
 
 	@action addPlayerToLobby = player => {
