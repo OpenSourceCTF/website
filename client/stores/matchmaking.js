@@ -12,7 +12,6 @@ class MatchmakingStore {
 
 		// TEMP
 		;['teoretyczny', 'DwarfFortres', 'ElectroBall'].forEach(this.addPlayerToLobby)
-		this.changePlayerLobbyGroup('teoretyczny', 'team1')
 	}
 
 	@observable servers = []

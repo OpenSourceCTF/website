@@ -1,0 +1,23 @@
+@import '../../../../../global-styles/base/vars'
+
+$component-spacing: $baseline-spacing / 2
+
+.team
+	min-height: 150px
+	padding: $component-spacing
+	border-width: 2px
+	border-style: solid
+	border-radius: 1px
+	background: rgba(0, 0, 0, 0.3)
+	transition: background .15s
+
+	> header h3
+		margin: 0
+
+	&--active
+		background: rgba(0, 0, 0, 0.15)
+
+	ul
+		display: flex
+		flex-wrap: wrap
+		list-style: none

@@ -1,60 +1,63 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { PropTypes as MobxPropTypes } from 'mobx-react'
+import { observer, PropTypes as MobxPropTypes } from 'mobx-react'
+import { DragDropContext } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
+
+import Team from './components/team/'
 
 import styles from './private-game-lobby.sass'
 
-const renderPlayerInList = player => (
-	<li key={player.name} className={styles['player']}>{player.name}</li>
-)
+@DragDropContext(HTML5Backend)
+@observer
+class PrivateGameLobby extends Component {
+	static propTypes = {
+		players: MobxPropTypes.observableArrayOf(PropTypes.object).isRequired,
+		lobbyIsPublic: PropTypes.bool.isRequired
+	}
 
-const PrivateGameLobby = ({ players, lobbyIsPublic }) => {
-	const renderedGroups = players.reduce((grouped, player) => ({
-		...grouped,
-		[player.group]: [
-			...grouped[player.group],
-			renderPlayerInList(player)
-		]
-	}), { team1: [], team2: [], spectators: [] })
+	render () {
+		const { players, lobbyIsPublic } = this.props
 
-	return (
-		<div className={styles['wrapper']}>
-			<header className={styles['header']}>
-				<h2>Lobby ({ lobbyIsPublic ? 'Public' : 'Private' })</h2>
-			</header>
-			<div className={styles['teams-wrapper']}>
-				<div className={`${styles['team']} ${styles['team--1']}`}>
-					<header>
-						<h3>Red Team</h3>
-					</header>
-					<ul>
-						{renderedGroups.team1}
-					</ul>
-				</div>
-				<div className={`${styles['team']} ${styles['team--2']}`}>
-					<header>
-						<h3>Blue Team</h3>
-					</header>
-					<ul>
-						{renderedGroups.team2}
-					</ul>
-				</div>
-			</div>
-			<div className={`${styles['team']} ${styles['team--spectators']}`}>
-				<header>
-					<h3>Spectators</h3>
+		const groups = players.reduce((grouped, player) => ({
+			...grouped,
+			[player.group]: [
+				...grouped[player.group],
+				player
+			]
+		}), { team1: [], team2: [], spectators: [] })
+
+		return (
+			<div className={styles['wrapper']}>
+				<header className={styles['header']}>
+					<h2>Lobby ({ lobbyIsPublic ? 'Public' : 'Private' })</h2>
 				</header>
-				<ul>
-					{renderedGroups.spectators}
-				</ul>
+				<div className={styles['teams-wrapper']}>
+					<Team
+						className={styles['team--1']}
+						teamName="team1"
+						teamFriendlyName="Red Team"
+						players={groups.team1}
+						accepts={Object.keys(groups).filter(group => group !== 'team1')}
+					/>
+					<Team
+						className={styles['team--2']}
+						teamName="team2"
+						teamFriendlyName="Blue Team"
+						players={groups.team2}
+						accepts={Object.keys(groups).filter(group => group !== 'team2')}
+					/>
+				</div>
+				<Team
+					className={styles['team--spectators']}
+					teamName="spectators"
+					teamFriendlyName="Spectators"
+					players={groups.spectators}
+					accepts={Object.keys(groups).filter(group => group !== 'spectators')}
+				/>
 			</div>
-		</div>
-	)
-}
-
-PrivateGameLobby.propTypes = {
-	players: MobxPropTypes.observableArrayOf(PropTypes.object).isRequired,
-	lobbyIsPublic: PropTypes.bool.isRequired
+		)
+	}
 }
 
 export default PrivateGameLobby
