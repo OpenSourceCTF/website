@@ -7,25 +7,26 @@ import { Link } from 'react-router-dom'
 
 import styles from './nav-primary.sass'
 
-const defaultNavItems = [{
-	text: 'Play',
-	link: '/play'
-}, {
-	text: 'Leaderboards',
-	link: '/leaderboards'
-}, {
-	text: 'Maps',
-	link: '/maps'
-}, {
-	text: 'Addons',
-	link: '/addons'
-}, {
-	text: 'Profile',
-	link: '/profile'
-}]
+const Nav = ({ lobbyIsActive, items, minimal = false }) => {
+	const defaultNavItems = [{
+		text: lobbyIsActive && !urlStartsWithMatch('/play') ? 'Play ( ! )' : 'Play',
+		link: '/play'
+	}, {
+		text: 'Leaderboards',
+		link: '/leaderboards'
+	}, {
+		text: 'Maps',
+		link: '/maps'
+	}, {
+		text: 'Addons',
+		link: '/addons'
+	}, {
+		text: 'Profile',
+		link: '/profile'
+	}]
 
-const Nav = ({ items, minimal = false }) => {
 	const navItemsToUse = items && items.length ? items : defaultNavItems
+
 	const renderedNavItems = minimal ? null : navItemsToUse.map(item => {
 		const itemClasses = classNames({ [styles['item--active']]: urlStartsWithMatch(item.link) })
 
@@ -59,6 +60,7 @@ const Nav = ({ items, minimal = false }) => {
 }
 
 Nav.propTypes = {
+	lobbyIsActive: PropTypes.bool.isRequired,
 	items: PropTypes.array,
 	minimal: PropTypes.bool
 }
