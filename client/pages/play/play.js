@@ -5,7 +5,7 @@ import { PropTypes as MobxPropTypes } from 'mobx-react'
 import Chatbox from '../../components/chatbox/'
 import PrimaryNav from '../../components/nav/primary/'
 import PrivateGameLobby from '../../components/lobby/private-game/'
-import PublicLGameobby from '../../components/lobby/public-game/'
+import PublicGameLobby from '../../components/lobby/public-game/'
 import { SecondaryNav, SecondaryNavItem } from '../../components/nav/secondary/'
 import ServerPicker from '../../components/server-picker/'
 
@@ -49,7 +49,7 @@ class PlayPage extends Component {
 	render () {
 		const renderedChatbox = this.state.lobbyWasEverActive ? <Chatbox /> : null
 
-		const Lobby = this.props.gameIsPrivate ? PrivateGameLobby : PublicLGameobby
+		const Lobby = this.props.gameIsPrivate ? PrivateGameLobby : PublicGameLobby
 
 		return (
 			<div className="u-page">
