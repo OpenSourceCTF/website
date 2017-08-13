@@ -30,7 +30,12 @@ class PrivateGameLobby extends Component {
 		return (
 			<div className={styles['wrapper']}>
 				<header className={styles['header']}>
-					<h2>Lobby ({ lobbyIsPublic ? 'Public' : 'Private' })</h2>
+					<h2>
+						Lobby
+						<span className={`c-label c-label--${lobbyIsPublic ? 'active' : 'dormant'}`}>
+							{ lobbyIsPublic ? 'Public' : 'Private' }
+						</span>
+					</h2>
 				</header>
 				<div className={styles['teams-wrapper']}>
 					<Team

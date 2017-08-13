@@ -17,7 +17,7 @@ const PublicLobby = ({ servers, selectedServer, selectServer }) => {
 			<select
 				value={selectedServer}
 				onChange={evt => selectServer(evt.target.value)}
-				name="server"
+				id="server"
 			>
 				{renderedServerOpts}
 			</select>

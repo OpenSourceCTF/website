@@ -19,6 +19,9 @@ class PlayPage extends Component {
 		gameIsPrivate: PropTypes.bool.isRequired,
 		setGamePublic: PropTypes.func.isRequired,
 		setGamePrivate: PropTypes.func.isRequired,
+		lobbyIsPublic: PropTypes.bool.isRequired,
+		setLobbyPublic: PropTypes.func.isRequired,
+		setLobbyPrivate: PropTypes.func.isRequired,
 		lobbyIsActive: PropTypes.bool.isRequired
 	}
 
@@ -28,6 +31,19 @@ class PlayPage extends Component {
 
 	componentWillReceiveProps (nextProps) {
 		if (nextProps.lobbyIsActive) this.setState({ lobbyWasEverActive: true })
+	}
+
+	handleGenericInput = evt => {
+		const tgt = evt.target
+		const value = tgt[tgt.type === 'checkbox' ? 'checked' : 'value']
+
+		this.setState({ [tgt.name]: value })
+	}
+
+	handleLobbyPublicity = evt => {
+		const makePublic = evt.target.checked
+
+		makePublic ? this.props.setLobbyPublic() : this.props.setLobbyPrivate()
 	}
 
 	render () {
@@ -77,6 +93,14 @@ class PlayPage extends Component {
 							<header>
 								<h1>Options</h1>
 							</header>
+
+							<label htmlFor="public-lobby">Public lobby?:</label>
+							<input
+								type="checkbox"
+								id="public-lobby"
+								value={this.props.lobbyIsPublic}
+								onChange={this.handleLobbyPublicity}
+							/>
 
 							<ServerPicker />
 						</aside>
