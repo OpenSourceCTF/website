@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { PropTypes as MobxPropTypes } from 'mobx-react'
 
+import Chatbox from '../../components/chatbox/'
 import PrimaryNav from '../../components/nav/primary/'
 import PrivateGameLobby from '../../components/lobby/private-game/'
 import PublicLGameobby from '../../components/lobby/public-game/'
@@ -17,10 +18,21 @@ class PlayPage extends Component {
 		selectServer: PropTypes.func.isRequired,
 		gameIsPrivate: PropTypes.bool.isRequired,
 		setGamePublic: PropTypes.func.isRequired,
-		setGamePrivate: PropTypes.func.isRequired
+		setGamePrivate: PropTypes.func.isRequired,
+		lobbyIsActive: PropTypes.bool.isRequired
+	}
+
+	state = {
+		lobbyWasEverActive: false
+	}
+
+	componentWillReceiveProps (nextProps) {
+		if (nextProps.lobbyIsActive) this.setState({ lobbyWasEverActive: true })
 	}
 
 	render () {
+		const renderedChatbox = this.state.lobbyWasEverActive ? <Chatbox /> : null
+
 		const Lobby = this.props.gameIsPrivate ? PrivateGameLobby : PublicLGameobby
 
 		return (
@@ -55,6 +67,8 @@ class PlayPage extends Component {
 									{this.props.gameIsPrivate ? 'Start Private Game' : 'Search for Public Game' }
 								</button>
 							</div>
+
+							{renderedChatbox}
 
 							<Lobby />
 						</div>

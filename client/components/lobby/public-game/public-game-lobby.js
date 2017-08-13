@@ -10,7 +10,7 @@ const PublicGameLobby = ({ players, lobbyIsPublic }) => {
 
 	return (
 		<div>
-			<header>
+			<header className={styles['header']}>
 				<h2>Lobby ({ lobbyIsPublic ? 'Public' : 'Private' })</h2>
 			</header>
 			<ul className={styles['list']}>

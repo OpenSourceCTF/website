@@ -1,0 +1,31 @@
+@import '../../global-styles/base/vars'
+
+.wrapper
+	border: 2px solid $color-primary
+	background: rgba(0, 0, 0, 0.3)
+
+.messages
+	height: 200px
+	padding: $baseline-spacing / 2
+	list-style: none
+	overflow-y: scroll
+
+	li + li
+		margin-top: $baseline-spacing / 4
+
+.form
+	display: grid
+	grid-template-columns: 1fr 35px
+	border-top: 1px solid $color-primary
+
+.input
+	padding: $baseline-spacing / 4
+
+.send
+	border-left: 1px solid $color-primary
+	transition: background .15s
+	cursor: not-allowed
+
+	&--active
+		background: $color-primary
+		cursor: pointer
