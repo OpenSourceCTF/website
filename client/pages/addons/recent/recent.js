@@ -1,15 +1,26 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { PropTypes as MobxPropTypes } from 'mobx-react'
 
+import AddonCollection from '../../../components/addons/addon-collection'
 import AddonsNav from '../addons-nav'
 
-const RecentAddonsPage = () => (
-	<div>
-		<AddonsNav />
+class RecentAddonsPage extends Component {
+	static propTypes = {
+		addons: MobxPropTypes.observableArrayOf(MobxPropTypes.observableObject).isRequired
+	}
 
-		<main className="u-width-limiter">
-			<h1>addons/recent</h1>
-		</main>
-	</div>
-)
+	render () {
+		return (
+			<div>
+				<AddonsNav />
+
+				<main className='u-width-limiter'>
+					<h1>Recently updated addons</h1>
+					<AddonCollection />
+				</main>
+			</div>
+		)
+	}
+}
 
 export default RecentAddonsPage

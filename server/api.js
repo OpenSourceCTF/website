@@ -58,4 +58,36 @@ router.get('/api/servers', ctx => {
 	}
 })
 
+router.get('/api/addons', ctx => {
+	const addonsTemp = [{
+		id: '1',
+		name: 'Tattle Timers',
+		author: 'RonSpawnson',
+		version: '1.0',
+		rating: '5.0',
+		lastModified: '2017-08-15T18:25:43.511Z',
+		totalUsers: 219
+	}, {
+		id: '2',
+		name: 'HarkMommis',
+		author: 'RonSpawnson',
+		version: '1.2',
+		rating: '4.5',
+		lastModified: '2017-08-01T12:11:19.218Z',
+		totalUsers: 8
+	}, {
+		id: '3',
+		name: 'Live Player Position',
+		author: 'ProfessorTag',
+		version: '2.0',
+		rating: '4.5',
+		lastModified: '2017-08-16T19:44:10.499Z',
+		totalUsers: 9001
+	}]
+
+	ctx.body = {
+		addons: addonsTemp
+	}
+})
+
 module.exports = router
