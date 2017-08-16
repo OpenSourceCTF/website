@@ -16,7 +16,7 @@ class MatchmakingStore {
 
 	@observable servers = []
 	@observable chosenServer = ''
-	@observable privateGame = false
+	@observable publicGame = true
 	@observable publicLobby = false
 	@observable othersInLobby = [] // 'team1', 'team2', or 'spectators'
 
@@ -45,11 +45,11 @@ class MatchmakingStore {
 	}
 
 	@action setGamePublic = () => {
-		this.privateGame = false
+		this.publicGame = true
 	}
 
 	@action setGamePrivate = () => {
-		this.privateGame = true
+		this.publicGame = false
 	}
 
 	@action setLobbyPublic = () => {

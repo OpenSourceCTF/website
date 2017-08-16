@@ -52,7 +52,7 @@ class PlayPage extends Component {
 		const Lobby = this.props.gameIsPrivate ? PrivateGameLobby : PublicGameLobby
 
 		return (
-			<div className="u-page">
+			<div className="u-row-spacer">
 				<div>
 					<PrimaryNav />
 
@@ -74,7 +74,7 @@ class PlayPage extends Component {
 
 				<main className="u-width-limiter">
 					<div className={styles['wrapper']}>
-						<div className="u-page">
+						<div className="u-row-spacer">
 							<div>
 								<button
 									type="button"
