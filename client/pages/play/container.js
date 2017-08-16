@@ -19,7 +19,7 @@ class PlayPageContainer extends Component {
 				servers={matchmaking.servers}
 				selectedServer={matchmaking.chosenServer}
 				selectServer={matchmaking.setServer}
-				gameIsPrivate={matchmaking.privateGame}
+				gameIsPrivate={!matchmaking.publicGame}
 				setGamePublic={matchmaking.setGamePublic}
 				setGamePrivate={matchmaking.setGamePrivate}
 				lobbyIsPublic={matchmaking.publicLobby}
