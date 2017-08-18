@@ -1,5 +1,6 @@
 'use strict'
 
+const path = require('path')
 const merge = require('lodash.merge')
 const webpack = require('webpack')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
@@ -12,6 +13,12 @@ require('dotenv').config({ silent: true })
 const webPort = Number(process.env.WEB_SERVER_PORT) || 5000
 
 module.exports = merge(baseConfig, {
+	resolve: {
+		// Make local development of the web client a ton easier as it won't treat
+		// the web client package as a local file but rather as a fully fledged npm
+		// module
+		symlinks: false
+	},
 	entry: [
 		'react-hot-loader/patch',
 		'./client/index.js'
