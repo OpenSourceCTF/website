@@ -1,0 +1,24 @@
+@import '../../global-styles/base/vars'
+
+.wrapper
+	display: grid
+	grid-gap: $baseline-spacing
+
+	@media (min-width: 650px)
+		grid-template-columns: 3fr 2fr
+
+	@media (min-width: 1050px)
+		grid-template-columns: 2fr 1fr
+
+.options
+	padding: $baseline-spacing
+	border: 2px solid $color-primary
+	border-radius: 1px
+	background: rgba(0, 0, 0, .3)
+
+	> header h1
+		margin-top: 0
+
+	label
+		display: inline-block
+		margin: 0 ($baseline-spacing / 3) ($baseline-spacing / 3) 0

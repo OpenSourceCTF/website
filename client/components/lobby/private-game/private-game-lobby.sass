@@ -1,0 +1,27 @@
+@import '../../../global-styles/base/vars'
+
+$component-spacing: $baseline-spacing / 2
+
+.wrapper
+	display: grid
+	grid-row-gap: $component-spacing
+
+.header h2
+	margin: 0
+
+.teams-wrapper
+	display: grid
+	grid-gap: $component-spacing
+
+	@media (min-width: 500px)
+		grid-template-columns: 1fr 1fr
+
+.team
+	&--1
+		border-color: #ec1d26
+
+	&--2
+		border-color: #1d26ec
+
+	&--spectators
+		border-color: white

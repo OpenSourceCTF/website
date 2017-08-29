@@ -1,20 +1,40 @@
 /* eslint-disable import/first */
 
+import React from 'react'
+import { render } from 'react-dom'
+import { useStrict } from 'mobx'
+import cfg from '../config'
+import stores from './stores/'
+
+import Helmet from 'react-helmet'
+import { Provider } from 'mobx-react'
+import Router from './router'
+
 // Per Babel config this will conditionally bundle the required polyfills during
 // build
 import 'babel-polyfill'
 
 // Webpack entrypoint for styles
-import './styles/index'
+import './global-styles/'
 
 // Enable HMR
 if (module.hot) module.hot.accept()
 
-// Using Webpack's DefinePlugin we can use global constants such as DEVMODE to
-// have some code (e.g. logging) stay in our codebase but be stripped out
-// during production builds
-if (DEVMODE) console.log('Dev mode active')
+// Enable mobx strict mode
+useStrict(true)
 
-// Load each encapsulated segment of the app
-import example from './interactions/example'
-example()
+// For easier debugging of mobx
+if (DEVMODE) window._MOBX_ = stores
+
+// Initialise React tree
+const App = () => (
+	<div>
+		<Helmet title={cfg.get('APP_NAME')} />
+		<Provider {...stores} >
+			<Router />
+		</Provider>
+	</div>
+)
+
+// Render React to DOM
+render(<App />, document.querySelector('.js-app'))
