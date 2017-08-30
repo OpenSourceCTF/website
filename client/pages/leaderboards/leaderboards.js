@@ -1,6 +1,6 @@
 import React from 'react'
 
-import PrimaryNav from '../../components/nav/primary/'
+import PrimaryNav from 'Components/nav/primary/'
 
 const LeaderboardsPage = () => (
 	<div>
