@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { observer, inject, PropTypes as MobxPropTypes } from 'mobx-react'
+import { observer, inject } from 'mobx-react'
+import PropTypes from 'prop-types'
 
 import AddonCollection from '../../../components/addons/addon-collection'
 import AddonsNav from '../addons-nav'
@@ -8,7 +9,7 @@ import AddonsNav from '../addons-nav'
 @observer
 class RecentAddonsPage extends Component {
 	static propTypes = {
-		addons: MobxPropTypes.observableArrayOf(MobxPropTypes.observableObject).isRequired
+		addons: PropTypes.array.isRequired
 	}
 
 	render () {

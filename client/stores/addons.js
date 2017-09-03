@@ -11,9 +11,8 @@ class AddonsStore {
 
 	@computed get addonsSortedByMostRecent () {
 		return this.addons.sort((a, b) => {
-			if (a.lastUpdated > b.lastUpdated) return -1
-			else if (a.lastUpdated < b.lastUpdated) return 1
-
+			if (a.lastModified > b.lastModified) return -1
+			else if (a.lastModified < b.lastModified) return 1
 			return 0
 		})
 	}

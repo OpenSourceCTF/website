@@ -7,7 +7,7 @@ import AddonCollectionPage from './addon-collection'
 @observer
 class AddonCollectionPageContainer extends Component {
 	static propTypes = {
-		addons: PropTypes.object.isRequired
+		addons: PropTypes.array.isRequired
 	}
 
 	render () {
