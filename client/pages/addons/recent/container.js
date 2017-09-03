@@ -4,19 +4,19 @@ import PropTypes from 'prop-types'
 
 import RecentAddonsPage from './recent'
 
-@inject('addon')
+@inject('addons')
 @observer
 class RecentAddonsPageContainer extends Component {
 	static propTypes = {
-		addon: PropTypes.object.isRequired
+		addons: PropTypes.object.isRequired
 	}
 
 	render () {
-		const { addon } = this.props
+		const { addons } = this.props
 
 		return (
 			<RecentAddonsPage
-				addons={addon.addons}
+				addons={addons.addonsSortedByMostRecent}
 			/>
 		)
 	}

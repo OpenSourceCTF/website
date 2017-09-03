@@ -1,7 +1,7 @@
 import { observable, computed, action, runInAction } from 'mobx'
 import axios from 'axios'
 
-class AddonStore {
+class AddonsStore {
 	constructor () {
 		// Fetch list of addons from website server
 		this.getAddons()
@@ -27,4 +27,4 @@ class AddonStore {
 	}
 }
 
-export default new AddonStore()
+export default new AddonsStore()

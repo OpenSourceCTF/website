@@ -1,11 +1,11 @@
 import matchmaking from './matchmaking'
 import user from './user'
-import addon from './addon'
+import addons from './addons'
 
 const stores = {
 	matchmaking,
 	user,
-	addon
+	addons
 }
 
 export default stores

@@ -3,15 +3,15 @@ import PropTypes from 'prop-types'
 
 const AddonCollection = ({ addons }) => {
 	const renderedAddonElements = addons.map(addon => (
-		<div id={addon.name} key={addon.name}>
+		<li key={addon.name}>
 			<strong>{addon.name}</strong> - {addon.author}. Installs: {addon.totalUsers}. Rating: {addon.rating}
-		</div>
+		</li>
 	))
 
 	return (
-		<div>
+		<ul>
 			{renderedAddonElements}
-		</div>
+		</ul>
 	)
 }
 
