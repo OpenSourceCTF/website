@@ -1,15 +1,30 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { observer, inject } from 'mobx-react'
+import PropTypes from 'prop-types'
 
+import AddonCollection from '../../../components/addons/addon-collection'
 import AddonsNav from '../addons-nav'
 
-const RecentAddonsPage = () => (
-	<div>
-		<AddonsNav />
+@inject('addons')
+@observer
+class RecentAddonsPage extends Component {
+	static propTypes = {
+		addons: PropTypes.array.isRequired
+	}
 
-		<main className="u-width-limiter">
-			<h1>addons/recent</h1>
-		</main>
-	</div>
-)
+	render () {
+		const { addons } = this.props
+		return (
+			<div>
+				<AddonsNav />
+
+				<main className='u-width-limiter'>
+					<h1>Recently updated addons</h1>
+					<AddonCollection addons={addons} />
+				</main>
+			</div>
+		)
+	}
+}
 
 export default RecentAddonsPage
