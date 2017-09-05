@@ -21,4 +21,6 @@ In development, start the server with `npm run start-dev`. This server will relo
 
 The build task can be run with `npm run build`.
 
+Tests can be run with `npm run test`. This will also output a coverage report at `./coverage/`.
+
 You can run `npm run build-stats` to generate statistics regarding the build.

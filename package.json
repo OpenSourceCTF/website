@@ -14,6 +14,7 @@
 	"scripts": {
 		"start": "node server/",
 		"start-dev": "webpack-dev-server --config build/webpack.development.config.js & nodemon server/",
+		"test": "jest --coverage client/tests/",
 		"build": "webpack --define process.env.NODE_ENV=\"production\" --config build/webpack.production.config.js",
 		"build-stats": "webpack --define process.env.NODE_ENV=\"production\" --config build/webpack.production.config.js --json > stats.json"
 	},
@@ -45,6 +46,7 @@
 		"autoprefixer": "^7.1.2",
 		"babel-core": "^6.25.0",
 		"babel-eslint": "^7.2.3",
+		"babel-jest": "^20.0.3",
 		"babel-loader": "^7.1.1",
 		"babel-plugin-syntax-dynamic-import": "^6.18.0",
 		"babel-plugin-syntax-jsx": "^6.18.0",
@@ -73,6 +75,7 @@
 		"eslint-plugin-react": "^7.1.0",
 		"eslint-plugin-standard": "^3.0.1",
 		"extract-text-webpack-plugin": "^3.0.0",
+		"jest": "^20.0.4",
 		"lodash.merge": "^4.6.0",
 		"node-sass": "^4.5.3",
 		"nodemon": "^1.11.0",
@@ -82,5 +85,11 @@
 		"style-loader": "^0.18.2",
 		"webpack": "^3.4.1",
 		"webpack-dev-server": "^2.6.1"
+	},
+	"jest": {
+		"moduleNameMapper": {
+			"^Components(.*)$": "<rootDir>/client/components$1",
+			"^Modules(.*)$": "<rootDir>/client/modules$1"
+		}
 	}
 }
