@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { PropTypes as MobxPropTypes } from 'mobx-react'
 
-import Chatbox from '../../components/chatbox/'
-import PrimaryNav from '../../components/nav/primary/'
-import PrivateGameLobby from '../../components/lobby/private-game/'
-import PublicGameLobby from '../../components/lobby/public-game/'
-import { SecondaryNav, SecondaryNavItem } from '../../components/nav/secondary/'
-import ServerPicker from '../../components/server-picker/'
+import Chatbox from 'Components/chatbox/'
+import PrimaryNav from 'Components/nav/primary/'
+import PrivateGameLobby from 'Components/lobby/private-game/'
+import PublicGameLobby from 'Components/lobby/public-game/'
+import { SecondaryNav, SecondaryNavItem } from 'Components/nav/secondary/'
+import ServerPicker from 'Components/server-picker/'
 
 import styles from './play.sass'
 

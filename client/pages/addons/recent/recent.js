@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
 import PropTypes from 'prop-types'
 
-import AddonCollection from '../../../components/addons/addon-collection'
+import AddonCollection from 'Components/addons/addon-collection'
 import AddonsNav from '../addons-nav'
 
 @inject('addons')

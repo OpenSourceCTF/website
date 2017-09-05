@@ -1,12 +1,12 @@
 import React from 'react'
 import classNames from 'classnames'
-import { urlStartsWithMatch } from '../../modules/url-matching'
+import { urlStartsWithMatch } from 'Modules/url-matching'
 
 import { Link } from 'react-router-dom'
-import PrimaryNav from '../../components/nav/primary/'
-import { SecondaryNav, SecondaryNavItem } from '../../components/nav/secondary/'
+import PrimaryNav from 'Components/nav/primary/'
+import { SecondaryNav, SecondaryNavItem } from 'Components/nav/secondary/'
 
-import secondaryNavStyles from '../../components/nav/secondary/nav-secondary.sass'
+import secondaryNavStyles from 'Components/nav/secondary/nav-secondary.sass'
 
 const navItems = [{
 	text: 'Installed',
