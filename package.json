@@ -1,8 +1,8 @@
 {
-	"name": "ctfpro-website",
+	"name": "osctf-website",
 	"version": "1.0.0",
-	"description": "CTF Pro website",
-	"author": "ctfpro",
+	"description": "OSCTF website",
+	"author": "OSCTF",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
