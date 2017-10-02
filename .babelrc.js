@@ -11,7 +11,8 @@ module.exports = {
 			useBuiltIns: true,
 			// For Webpack tree shaking
 			modules: false
-		}]
+		}],
+		'react'
 	],
 	// These are plugins for JS standard proposals that aren't yet fully
 	// standardised but are well worth using now anyway. Anything that's already
@@ -26,10 +27,6 @@ module.exports = {
 		// {...object}
 		'transform-object-rest-spread',
 		// Export default from
-		'transform-export-default',
-		// React configured sans flow
-		'syntax-jsx',
-		'transform-react-jsx',
-		'transform-react-display-name'
+		'transform-export-default'
 	]
 }
