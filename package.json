@@ -59,7 +59,6 @@
 		"babel-plugin-transform-runtime": "^7.0.0-beta.2",
 		"babel-preset-babili": "^0.1.4",
 		"babel-preset-env": "^1.6.0",
-		"babel-runtime": "^7.0.0-beta.2",
 		"case-sensitive-paths-webpack-plugin": "^2.1.1",
 		"css-loader": "^0.28.7",
 		"csso-loader": "^0.3.1",
