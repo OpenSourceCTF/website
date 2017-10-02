@@ -22,14 +22,14 @@
 	"plugins": [
 		// import()
 		"syntax-dynamic-import",
-		// @decorators - must be listed BEFORE class properties
+		// @decorators (legacy) - must be listed BEFORE class properties
 		"transform-decorators-legacy",
-		// Static class properties & ES2016 property initialiser syntax
-		"transform-class-properties",
+		// Static class properties & ES2016 property initialiser syntax - loose to maintain compatibility with legacy decorators
+		["transform-class-properties", { "loose": true }],
 		// {...object}
 		"transform-object-rest-spread",
-		// Export extensions
-		"transform-export-extensions",
+		// Export default from
+		"transform-export-default",
 		// React configured sans flow
 		"syntax-jsx",
 		"transform-react-jsx",
