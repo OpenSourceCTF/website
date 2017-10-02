@@ -1,38 +1,35 @@
-{
-	"presets": [
-		["env", {
+const cfg = require('./config')
+
+module.exports = {
+	presets: [
+		['env', {
 			// Dynamically targeted feature transpilation
-			"targets": {
-				"browsers": [
-					"last 2 Chrome versions",
-					"last 2 Firefox versions",
-					"last 2 Edge versions",
-					"last 2 Safari versions"
-				]
+			targets: {
+				browsers: cfg.get('BROWSER_SUPPORT')
 			},
 			// Enable conditional polyfilling babel-polyfill
-			"useBuiltIns": true,
+			useBuiltIns: true,
 			// For Webpack tree shaking
-			"modules": false
+			modules: false
 		}]
 	],
 	// These are plugins for JS standard proposals that aren't yet fully
 	// standardised but are well worth using now anyway. Anything that's already
 	// fully standardised is covered by the env preset above
-	"plugins": [
+	plugins: [
 		// import()
-		"syntax-dynamic-import",
+		'syntax-dynamic-import',
 		// @decorators (legacy) - must be listed BEFORE class properties
-		"transform-decorators-legacy",
+		'transform-decorators-legacy',
 		// Static class properties & ES2016 property initialiser syntax - loose to maintain compatibility with legacy decorators
-		["transform-class-properties", { "loose": true }],
+		['transform-class-properties', { 'loose': true }],
 		// {...object}
-		"transform-object-rest-spread",
+		'transform-object-rest-spread',
 		// Export default from
-		"transform-export-default",
+		'transform-export-default',
 		// React configured sans flow
-		"syntax-jsx",
-		"transform-react-jsx",
-		"transform-react-display-name"
+		'syntax-jsx',
+		'transform-react-jsx',
+		'transform-react-display-name'
 	]
 }
