@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PrimaryNav from 'Components/nav/primary/'
-import { renderer, makeFullscreen } from 'ctfpro-web-client'
+import { renderer, makeFullscreen } from 'osctf-web-client'
+
 import styles from './arena.sass'
 
 class Arena extends Component {
@@ -10,17 +11,19 @@ class Arena extends Component {
 
 	render () {
 		return (
-			<div>
+			<div className={styles['wrapper']}>
 				<PrimaryNav />
-				<main
-					className={styles['wrapper']}
-					ref={el => { this.gameEl = el }}
-				/>
-				<div id={styles['fullscreen']}>
-					<button onClick={makeFullscreen}>
-						Fullscreen
-					</button>
-				</div>
+				<main className={styles['game']}>
+					<div>
+						<div ref={el => { this.gameEl = el }} />
+						<button
+							onClick={makeFullscreen}
+							className={styles['fullscreen']}
+						>
+							Fullscreen
+						</button>
+					</div>
+				</main>
 			</div>
 		)
 	}
