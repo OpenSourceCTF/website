@@ -10,6 +10,7 @@ Browser support is the last 2 versions of modern browsers only (Chrome, Firefox,
 
 - Node >= 8.x
 - npm >= 5.x
+- PostgreSQL == 10.x w/ uuid-ossp extension.
 
 ## Quick Guide
 
@@ -22,3 +23,7 @@ In development, start the server with `npm run start-dev`. This server will relo
 The build task can be run with `npm run build`.
 
 You can run `npm run build-stats` to generate statistics regarding the build.
+
+# Migrations
+
+We use the Knex library for migrations. You may find working with the backend easier if you install the library globally, like so: `npm i -g knex`.

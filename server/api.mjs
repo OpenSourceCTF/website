@@ -1,4 +1,4 @@
-const Router = require('koa-router')
+import Router from 'koa-router'
 
 const router = new Router()
 
@@ -93,4 +93,4 @@ router.get('/api/addons', ctx => {
 	}
 })
 
-module.exports = router
+export default router
