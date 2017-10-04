@@ -5,6 +5,7 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 const baseConfig = require('./webpack.base.config')
+const cfg = require('../config')
 
 module.exports = merge(baseConfig, {
 	entry: './client/index.js',
@@ -52,12 +53,7 @@ module.exports = merge(baseConfig, {
 								plugins: () => [
 									// Dynamically targeted autoprefixing
 									autoprefixer({
-										browsers: [
-											'last 2 Chrome versions',
-											'last 2 Firefox versions',
-											'last 2 Edge versions',
-											'last 2 Safari versions'
-										]
+										browsers: cfg.get('BROWSER_SUPPORT')
 									})
 								]
 							}
