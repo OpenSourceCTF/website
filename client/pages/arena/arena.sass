@@ -1,5 +1,19 @@
+@import '../../global-styles/base/vars'
+
 .wrapper
-	min-height: 100vh
+	height: calc(100vh - #{$site-bottom-padding})
+	display: grid
+	grid-template-rows: auto 1fr
+
+.game
 	display: flex
 	justify-content: center
 	align-items: center
+
+.fullscreen
+	float: right
+	padding: 8px 5px
+	cursor: pointer
+
+	&:hover
+		text-decoration: underline

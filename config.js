@@ -1,6 +1,6 @@
 const config = new Map()
 
-config.set('APP_NAME', 'CTF Pro')
+config.set('APP_NAME', 'OS CTF')
 
 // browserlist shared by Webpack/Autoprefixer and Babel
 config.set('BROWSER_SUPPORT', [
