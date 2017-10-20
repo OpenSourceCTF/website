@@ -30,6 +30,10 @@ class PlayPage extends Component {
 		lobbyWasEverActive: false
 	}
 
+	componentWillMount () {
+		if (this.props.lobbyIsActive) this.setState({ lobbyWasEverActive: true })
+	}
+
 	componentWillReceiveProps (nextProps) {
 		if (nextProps.lobbyIsActive) this.setState({ lobbyWasEverActive: true })
 	}
@@ -99,7 +103,7 @@ class PlayPage extends Component {
 							<input
 								type="checkbox"
 								id="public-lobby"
-								value={this.props.lobbyIsPublic}
+								checked={this.props.lobbyIsPublic}
 								onChange={this.handleLobbyPublicity}
 							/>
 
