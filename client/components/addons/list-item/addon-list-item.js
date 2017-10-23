@@ -8,10 +8,10 @@ const AddonListItem = ({ name, description, author, totalUsers, rating }) => (
 		key={name}
 		className={`c-card ${styles['item']}`}
 	>
-		<span className={`${styles['addon-title']}`}>
+		<span className={styles['addon-title']}>
 			<strong>{name}</strong> by {author}
 		</span>
-		<span className={`${styles['addon-details']}`}>
+		<span className={styles['addon-details']}>
 			<em> &mdash; Rating: {100 * rating}% </em> ({totalUsers} users)
 		</span>
 		<p>{description}</p>
