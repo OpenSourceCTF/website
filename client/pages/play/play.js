@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { PropTypes as MobxPropTypes } from 'mobx-react'
 
 import Chatbox from 'Components/chatbox/'
+import { Link } from 'react-router-dom'
 import PrimaryNav from 'Components/nav/primary/'
 import PrivateGameLobby from 'Components/lobby/private-game/'
 import PublicGameLobby from 'Components/lobby/public-game/'
@@ -76,12 +77,12 @@ class PlayPage extends Component {
 					<div className={styles['wrapper']}>
 						<div className="u-row-spacer">
 							<div>
-								<button
-									type="button"
+								<Link
+									to="/arena"
 									className="c-btn c-btn--primary"
 								>
 									{this.props.gameIsPrivate ? 'Start Private Game' : 'Search for Public Game' }
-								</button>
+								</Link>
 							</div>
 
 							{renderedChatbox}
