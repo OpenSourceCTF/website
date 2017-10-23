@@ -90,7 +90,7 @@ class PlayPage extends Component {
 							<Lobby />
 						</div>
 
-						<aside className={styles['options']}>
+						<aside className={`c-card ${styles['options']}`}>
 							<header>
 								<h1>Options</h1>
 							</header>
