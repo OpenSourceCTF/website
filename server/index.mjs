@@ -9,10 +9,10 @@ import serve from 'koa-static'
 import views from 'koa-views'
 import cfg from '../config'
 import knexCfg from '../knexfile'
-import api from './api'
 import router from './router'
 
-import Player from './models/player'
+import tempApi from './api/temp'
+import authApi from './api/auth'
 
 // Environment variables
 dotenv.config()
@@ -22,18 +22,6 @@ const db = Knex(knexCfg)
 const { Model } = objection
 
 Model.knex(db)
-
-// Example create a new player on server start
-Player.query().insert({
-	username: `rand_${Math.floor(Math.random() * 1000000)}`,
-	password: 'meh'
-})
-	.then(player => {
-		console.log(`Created: ${player.username} (id: ${player.id})`)
-	})
-	.catch(err => {
-		console.log(err)
-	})
 
 // Server
 const app = new Koa()
@@ -57,7 +45,8 @@ app.use(async (ctx, next) => {
 })
 
 // Router
-app.use(api.routes())
+app.use(tempApi.routes())
+app.use(authApi.routes())
 app.use(router.routes())
 
 // Start the server
