@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
 import PropTypes from 'prop-types'
+import { login } from 'API/auth'
 
 import Login from './login'
 
@@ -14,10 +15,14 @@ class LoginContainer extends Component {
 	}
 
 	// This implementation is temporary
-	login = (handle, password) => {
-		// Both of these are expecting usernames, not emails
-		this.props.player.setPlayerDetails(handle)
-		this.props.matchmaking.addPlayerToLobby(handle)
+	login = async (handle, password) => {
+		const wasSuccess = await login(handle, password)
+
+		if (wasSuccess) {
+			// Note that both of these are expecting usernames, not emails
+			this.props.player.setPlayerDetails(handle)
+			this.props.matchmaking.addPlayerToLobby(handle)
+		}
 	}
 
 	render () {
