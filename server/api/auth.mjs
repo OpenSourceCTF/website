@@ -15,7 +15,11 @@ auth.post('/player', body(), ctx => {
 		return
 	}
 
-	return Player.query().insert({ username, email, password })
+	return Player.query().insert({
+		username,
+		email: email || null, // Don't insert empty string (optional field)
+		password
+	})
 		.then(player => {
 			console.log(`New player registered: ${player.username}`)
 
