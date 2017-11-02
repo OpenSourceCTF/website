@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
-import { observer, inject } from 'mobx-react'
 import PropTypes from 'prop-types'
 
 import AddonsNav from '../addons-nav'
 import AddonItem from 'Components/addons/list-item/'
 
-@inject('addons')
-@observer
 class RecentAddonsPage extends Component {
 	static propTypes = {
 		addons: PropTypes.arrayOf(PropTypes.object).isRequired
