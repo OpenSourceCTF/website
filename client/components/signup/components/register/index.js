@@ -1,1 +1,1 @@
-export default from './register'
+export default from './container'

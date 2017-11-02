@@ -5,7 +5,8 @@ import styles from '../../signup.sass'
 
 class Register extends PureComponent {
 	static propTypes = {
-		gotoLogin: PropTypes.func.isRequired
+		gotoLogin: PropTypes.func.isRequired,
+		onSubmit: PropTypes.func.isRequired
 	}
 
 	usernameEl = null
@@ -27,6 +28,16 @@ class Register extends PureComponent {
 		this.setState({ [tgt.name]: value })
 	}
 
+	handleSubmit = evt => {
+		evt.preventDefault()
+
+		const { username, email, password } = this.state
+
+		if (!username || !password) return
+
+		this.props.onSubmit(username, email, password)
+	}
+
 	render () {
 		return (
 			<div>
@@ -34,7 +45,7 @@ class Register extends PureComponent {
 					<h1>Register</h1>
 				</header>
 
-				<form>
+				<form onSubmit={this.handleSubmit}>
 					<input
 						type="text"
 						name="username"

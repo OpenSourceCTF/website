@@ -5,6 +5,7 @@ import styles from '../../signup.sass'
 
 class Login extends PureComponent {
 	static propTypes = {
+		onSubmit: PropTypes.func.isRequired,
 		gotoRegister: PropTypes.func.isRequired
 	}
 
@@ -26,6 +27,14 @@ class Login extends PureComponent {
 		this.setState({ [tgt.name]: value })
 	}
 
+	handleSubmit = evt => {
+		evt.preventDefault()
+
+		const { handle, password } = this.state
+
+		this.props.onSubmit(handle, password)
+	}
+
 	render () {
 		return (
 			<div>
@@ -33,7 +42,7 @@ class Login extends PureComponent {
 					<h1>Login</h1>
 				</header>
 
-				<form>
+				<form onSubmit={this.handleSubmit}>
 					<input
 						type="text"
 						name="handle"

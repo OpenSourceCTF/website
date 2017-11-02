@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { match, when } from 'match-when'
 
 import Login from './components/login/'
@@ -8,6 +9,10 @@ import Register from './components/register/'
 import styles from './signup.sass'
 
 class Signup extends PureComponent {
+	static propTypes = {
+		isLoggedIn: PropTypes.bool.isRequired
+	}
+
 	state = {
 		activeTab: 'login'
 	}
@@ -36,7 +41,7 @@ class Signup extends PureComponent {
 		})
 
 		return (
-			<Modal open={true}>
+			<Modal open={!this.props.isLoggedIn}>
 				<div className={styles['wrapper']}>
 					{content}
 				</div>
