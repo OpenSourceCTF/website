@@ -1,11 +1,11 @@
 'use strict'
 
-const path = require('path')
 const merge = require('lodash.merge')
 const webpack = require('webpack')
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const baseConfig = require('./webpack.base.config')
 const autoprefixer = require('autoprefixer')
+const cfg = require('../config')
 
 // Set var with fallbacks in case the env file failed to load or the env var is missing
 require('dotenv').config({ silent: true })
@@ -96,12 +96,7 @@ module.exports = merge(baseConfig, {
 							plugins: () => {
 								// Dynamically targeted autoprefixing
 								autoprefixer({
-									browsers: [
-										'last 2 Chrome versions',
-										'last 2 Firefox versions',
-										'last 2 Edge versions',
-										'last 2 Safari versions'
-									]
+									browsers: cfg.get('BROWSER_SUPPORT')
 								})
 							}
 						}

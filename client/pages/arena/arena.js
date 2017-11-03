@@ -1,19 +1,30 @@
 import React, { Component } from 'react'
-import InitGame from 'ctfpro-web-client'
+import PrimaryNav from 'Components/nav/primary/'
+import { renderer, makeFullscreen } from 'osctf-web-client'
 
 import styles from './arena.sass'
 
 class Arena extends Component {
 	componentDidMount () {
-		InitGame(this.gameEl)
+		this.gameEl.appendChild(renderer.view)
 	}
 
 	render () {
 		return (
-			<main
-				className={styles['wrapper']}
-				ref={el => { this.gameEl = el }}
-			/>
+			<div className={styles['wrapper']}>
+				<PrimaryNav />
+				<main className={styles['game']}>
+					<div>
+						<div ref={el => { this.gameEl = el }} />
+						<button
+							onClick={makeFullscreen}
+							className={styles['fullscreen']}
+						>
+							Fullscreen
+						</button>
+					</div>
+				</main>
+			</div>
 		)
 	}
 }

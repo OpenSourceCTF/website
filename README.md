@@ -4,7 +4,7 @@
 
 The website for CTF Pro.
 
-Browser support is the last 2 versions of modern browsers only (Chrome, Firefox, Edge, Safari). This is reflected in the Babel and Autoprefixer (Webpack -> PostCSS) configs.
+Browser support is the last 2 versions of modern browsers only (Chrome, Firefox, Edge, Safari). This is reflected in the browserslist config.
 
 # Prerequisites
 

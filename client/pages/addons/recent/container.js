@@ -12,11 +12,9 @@ class RecentAddonsPageContainer extends Component {
 	}
 
 	render () {
-		const { addons } = this.props
-
 		return (
 			<RecentAddonsPage
-				addons={addons.addonsSortedByMostRecent}
+				addons={this.props.addons.addonsSortedByMostRecent}
 			/>
 		)
 	}

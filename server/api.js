@@ -60,27 +60,30 @@ router.get('/api/servers', ctx => {
 
 router.get('/api/addons', ctx => {
 	const addonsTemp = [{
-		id: '1',
+		id: 1,
 		name: 'Tattle Timers',
+		description: 'Cheat your way to victory.',
 		author: 'RonSpawnson',
-		version: '1.0',
-		rating: '5.0',
+		version: 1.00,
+		rating: 1,
 		lastModified: '2017-08-15T18:25:43.511Z',
 		totalUsers: 219
 	}, {
-		id: '2',
+		id: 2,
 		name: 'HarkMommis',
+		description: 'I have no idea what this is.',
 		author: 'RonSpawnson',
-		version: '1.2',
-		rating: '4.5',
+		version: 1.2,
+		rating: 0.78,
 		lastModified: '2017-08-01T12:11:19.218Z',
 		totalUsers: 8
 	}, {
-		id: '3',
+		id: 3,
 		name: 'Live Player Position',
+		description: 'This is probably a good thing to have. Reduces render delay by 2 frames. You see where balls are a tiny bit sooner. It also removes the rounding to the nearest pixel so things look smoother (but a little blurry when "between" pixels).',
 		author: 'ProfessorTag',
-		version: '2.0',
-		rating: '4.5',
+		version: 2.0,
+		rating: 0.95,
 		lastModified: '2017-08-16T19:44:10.499Z',
 		totalUsers: 9001
 	}]
