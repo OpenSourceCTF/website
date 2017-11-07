@@ -11,7 +11,8 @@ exports.seed = knex =>
 				},
 				{
 					name: 'Map #2',
-					filename: '/path/to/map2.json'
+					filename: '/path/to/map2.json',
+					authors: ['Ron', 'azdif']
 				},
 				{
 					name: 'Map #3',
