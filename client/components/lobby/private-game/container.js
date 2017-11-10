@@ -16,7 +16,7 @@ class PrivateGameLobbyPageContainer extends Component {
 
 		return (
 			<PrivateGameLobbyPage
-				players={matchmaking.othersInLobby}
+				players={matchmaking.playersInLobby}
 				lobbyIsPublic={matchmaking.publicLobby}
 			/>
 		)

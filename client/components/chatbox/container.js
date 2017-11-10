@@ -4,11 +4,11 @@ import PropTypes from 'prop-types'
 
 import Chatbox from './chatbox'
 
-@inject('user')
+@inject('player')
 @observer
 class ChatboxContainer extends Component {
 	static propTypes = {
-		user: PropTypes.object.isRequired
+		player: PropTypes.object.isRequired
 	}
 
 	state = {
@@ -47,7 +47,7 @@ class ChatboxContainer extends Component {
 		// TEMP
 		const messages = [...this.state.messages, {
 			timestamp: Date.now(),
-			sender: this.props.user.username,
+			sender: this.props.player.username,
 			message
 		}]
 
