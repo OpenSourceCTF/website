@@ -10,7 +10,12 @@ const cfg = require('../config')
 // Set var with fallbacks in case the env file failed to load or the env var is missing
 require('dotenv').config({ silent: true })
 
-const webPort = Number(process.env.WEB_SERVER_PORT) || 5000
+const webPort = Number(process.env.HOST_WEB_PORT)
+const devPort = Number(process.env.HOST_DEV_PORT)
+
+if (!webPort || !devPort) {
+	throw new Error('Could not parse dev port(s). Your environment variables may be misconfigured.')
+}
 
 module.exports = merge(baseConfig, {
 	resolve: {
@@ -28,7 +33,7 @@ module.exports = merge(baseConfig, {
 		publicPath: '/dev-assets/'
 	},
 	devServer: {
-		port: webPort + 1,
+		port: devPort,
 		proxy: {
 			'!/dev-assets/**': {
 				target: `http://localhost:${String(webPort)}`,

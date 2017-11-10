@@ -12,3 +12,6 @@ end_of_line = lf
 
 [*.pug]
 trim_trailing_whitespace = false
+
+[*.yml]
+indent_style = space

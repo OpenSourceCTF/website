@@ -7,7 +7,7 @@ module.exports = {
 			Components: `${__dirname}/../client/components`,
 			Modules: `${__dirname}/../client/modules`,
 			API: `${__dirname}/../client/api`,
-			GlobalStyleVars: `${__dirname}/../client/global-styles/base/_vars.sass`
+			GlobalStyleVars$: `${__dirname}/../client/global-styles/base/_vars.sass`
 		}
 	},
 	output: {

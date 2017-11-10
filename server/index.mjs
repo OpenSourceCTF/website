@@ -8,7 +8,7 @@ import mount from 'koa-mount'
 import serve from 'koa-static'
 import views from 'koa-views'
 import cfg from '../config'
-import knexCfg from '../knexfile'
+import knexCfg from '../knexfile.docker'
 import router from './router'
 
 import tempApi from './api/temp'
