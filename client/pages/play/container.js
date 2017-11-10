@@ -25,7 +25,7 @@ class PlayPageContainer extends Component {
 				lobbyIsPublic={matchmaking.publicLobby}
 				setLobbyPublic={matchmaking.setLobbyPublic}
 				setLobbyPrivate={matchmaking.setLobbyPrivate}
-				lobbyIsActive={!!matchmaking.othersInLobby.length}
+				lobbyIsActive={matchmaking.lobbyIsActive}
 			/>
 		)
 	}

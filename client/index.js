@@ -7,6 +7,7 @@ import cfg from '../config'
 import stores from './stores/'
 
 import Helmet from 'react-helmet'
+import Signup from './components/signup/'
 import { Provider } from 'mobx-react'
 import Router from './router'
 
@@ -30,8 +31,13 @@ if (DEVMODE) window._MOBX_ = stores
 const App = () => (
 	<div>
 		<Helmet title={cfg.get('APP_NAME')} />
+
 		<Provider {...stores} >
-			<Router />
+			<div>
+				<Signup />
+
+				<Router />
+			</div>
 		</Provider>
 	</div>
 )
