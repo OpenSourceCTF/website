@@ -36,6 +36,8 @@ class MatchmakingStore {
 	@action getServers = async () => {
 		const servers = await getServers()
 
+		if (!servers) return
+
 		runInAction(() => {
 			this.servers = servers
 		})

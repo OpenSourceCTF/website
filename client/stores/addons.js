@@ -20,6 +20,8 @@ class AddonsStore {
 	@action getAddons = async () => {
 		const addons = await axios.get('/api/addons').then(res => res.data.addons)
 
+		if (!addons) return
+
 		runInAction(() => {
 			this.addons = addons
 		})

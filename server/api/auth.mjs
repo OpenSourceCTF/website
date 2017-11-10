@@ -1,31 +1,25 @@
 import Router from 'koa-router'
 import body from 'koa-body'
+import passport from 'koa-passport'
+import checkAuth from '../auth'
 import Player from '../models/player'
 
 const auth = new Router({ prefix: '/api/auth' })
 
-// Login - temporary implementation
-auth.post('/login', body(), async ctx => {
-	const { handle, password } = ctx.request.body
+// Login
+auth.post('/login', body(), (ctx, next) =>
+	passport.authenticate('local', (err, user) => {
+		const success = !err && !!user
 
-	if (!handle || !password) {
-		ctx.body = {
-			success: false
-		}
+		if (success) ctx.login(user)
 
-		return
-	}
+		ctx.body = { success }
+	})(ctx, next)
+)
 
-	const validAuth = await Player.query()
-		.where('username', handle)
-		.orWhere('email', handle)
-		.andWhere('password', password)
-		.limit(1)
-		.then(([player]) => !!player)
-
-	ctx.body = {
-		success: validAuth
-	}
+// Logout
+auth.post('/logout', checkAuth, ctx => {
+	ctx.logout()
 })
 
 // Register
@@ -47,6 +41,9 @@ auth.post('/player', body(), ctx => {
 	})
 		.then(player => {
 			console.log(`New player registered: ${player.username}`)
+
+			// Automatically log in the newly registered player
+			ctx.login(player)
 
 			ctx.body = {
 				success: true
