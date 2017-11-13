@@ -1,5 +1,6 @@
 import passport from 'koa-passport'
 import passportLocal from 'passport-local'
+import bcrypt from 'bcrypt'
 import Player from './models/player'
 
 passport.serializeUser((player, done) => {
@@ -25,12 +26,15 @@ passport.use(new LocalStrategy({
 	const player = await Player.query()
 		.where('username', handle)
 		.orWhere('email', handle)
-		.andWhere('password', password)
 		.limit(1)
 		.then(([res]) => res)
 		.catch(done)
 
-	if (player) done(null, player)
+	// Check the plaintext password provided against salted/hashed password
+	// retrieved for this player from DB
+	const validAuth = await bcrypt.compare(password, player.password)
+
+	if (validAuth) done(null, player)
 	else done(null, false)
 }))
 
