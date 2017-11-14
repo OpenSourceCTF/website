@@ -18,7 +18,7 @@ Browser support is the last 2 versions of modern browsers only (Chrome, Firefox,
 
 ## Quick Guide
 
-Install npm dependencies: `npm i`.
+Install npm dependencies: `npm i`. Note that for some modules with native binaries you may need to install/(re)build them from inside the relevant Docker container.
 
 Link the web client per the prerequisite instructions.
 
