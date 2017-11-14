@@ -3,7 +3,7 @@ import checkAuth from '../auth'
 
 const router = new Router()
 
-router.get('/api/servers', checkAuth, ctx => {
+router.get('/api/servers', checkAuth(), ctx => {
 	const serversTemp = [{
 		name: 'Eye',
 		location: 'London, UK',
@@ -59,7 +59,7 @@ router.get('/api/servers', checkAuth, ctx => {
 	}
 })
 
-router.get('/api/addons', checkAuth, ctx => {
+router.get('/api/addons', checkAuth(), ctx => {
 	const addonsTemp = [{
 		id: 1,
 		name: 'Tattle Timers',

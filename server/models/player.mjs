@@ -11,7 +11,7 @@ class Player extends Model {
 	}
 
 	// Salt/hash password before insertion
-	async $beforeInsert (...x) {
+	async $beforeInsert () {
 		if (this.password) {
 			this.password = await bcrypt.hash(this.password, saltRounds)
 		}

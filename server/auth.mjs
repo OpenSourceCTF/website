@@ -38,10 +38,32 @@ passport.use(new LocalStrategy({
 	else done(null, false)
 }))
 
-// If unauthenticated redirect to login
-const checkAuth = async (ctx, next) => {
-	if (ctx.isAuthenticated()) await next()
-	else ctx.redirect('/login')
+// If unauthenticated either redirect to login or send unauthorized status code
+const checkAuth = (...args) => {
+	// Default arguments
+	let redirect = false
+
+	// Rudimentary check to see if we've skipped manual config or not (1 argument
+	// is manual config, 2 arguments is middleware (as seen in returned function))
+	if (args.length === 1) {
+		const opts = args[0]
+
+		if (opts.redirect) redirect = opts.redirect
+	}
+
+	return async (ctx, next) => {
+		if (ctx.isAuthenticated()) await next()
+		else {
+			if (redirect) ctx.redirect('/login')
+			else {
+				ctx.body = {
+					success: false,
+					message: 'You do not have authorization to access this resource.'
+				}
+				ctx.status = 401
+			}
+		}
+	}
 }
 
 export default checkAuth

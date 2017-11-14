@@ -11,14 +11,17 @@ auth.post('/login', body(), (ctx, next) =>
 	passport.authenticate('local', (err, user) => {
 		const success = !err && !!user
 
-		if (success) ctx.login(user)
+		ctx.body = {
+			success
+		}
 
-		ctx.body = { success }
+		if (success) ctx.login(user)
+		else ctx.body.message = 'There was an issue with the authorization credentials supplied.'
 	})(ctx, next)
 )
 
 // Logout
-auth.post('/logout', checkAuth, ctx => {
+auth.post('/logout', checkAuth({ redirect: true }), ctx => {
 	ctx.logout()
 })
 
@@ -28,8 +31,10 @@ auth.post('/player', body(), ctx => {
 
 	if (!username || !password) {
 		ctx.body = {
-			success: false
+			success: false,
+			message: `Missing required username and/or password field(s).`
 		}
+		ctx.status = 422
 
 		return
 	}
@@ -52,9 +57,13 @@ auth.post('/player', body(), ctx => {
 		.catch(err => {
 			console.log(err)
 
+			// The message we give back to the client here is something of an
+			// assumption in the absence of more easily parseable errors
 			ctx.body = {
-				success: false
+				success: false,
+				message: `Username${email ? ' and/or email address ' : ' '}already in use.`
 			}
+			ctx.status = 409
 		})
 })
 
