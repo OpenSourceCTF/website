@@ -9,3 +9,7 @@ export const createPlayer = (username, email, password) =>
 export const login = (handle, password) =>
 	auth.post('/login', { handle, password })
 		.then(res => res.data.success)
+
+export const getInfo = () =>
+	auth.get('/info')
+		.then(res => res.data)

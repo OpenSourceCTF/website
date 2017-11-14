@@ -20,9 +20,24 @@ auth.post('/login', body(), (ctx, next) =>
 	})(ctx, next)
 )
 
+// Intended for retrieving info about user, but can also be used as a simple
+// auth check
+auth.get('/info', checkAuth(), (ctx, next) => {
+	ctx.body = {
+		success: true,
+		info: {
+			username: ctx.state.user.username,
+			email: ctx.state.user.email,
+			lastModifiedUsername: ctx.state.user.last_modified_username,
+			playerCreatedAt: ctx.state.user.created_at
+		}
+	}
+})
+
 // Logout
-auth.post('/logout', checkAuth({ redirect: true }), ctx => {
+auth.get('/logout', checkAuth({ redirect: true }), ctx => {
 	ctx.logout()
+	ctx.redirect('/login')
 })
 
 // Register

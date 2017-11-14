@@ -1,17 +1,19 @@
 import { observable, computed, action, runInAction } from 'mobx'
-import { getServers } from '../api/game'
+import { getServers } from 'API/game'
 
 class MatchmakingStore {
 	constructor () {
-		// Fetch list of game servers from website server
-		this.getServers()
-
 		// Get last used matchmaking server from user's browser
 		const previousChosenServer = localStorage.getItem('matchmaking_server')
 		if (previousChosenServer) this.setServer(previousChosenServer)
 
 		// TEMP
 		;['teoretyczny', 'DwarfFortres', 'ElectroBall'].forEach(this.addPlayerToLobby)
+	}
+
+	init () {
+		// Fetch list of game servers/regions from website server
+		this.getServers()
 	}
 
 	@observable servers = []
