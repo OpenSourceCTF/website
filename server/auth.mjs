@@ -30,6 +30,13 @@ passport.use(new LocalStrategy({
 		.then(([res]) => res)
 		.catch(done)
 
+	// Return fail if handle not found
+	if (!player) {
+		done(null, false)
+
+		return
+	}
+
 	// Check the plaintext password provided against salted/hashed password
 	// retrieved for this player from DB
 	const validAuth = await bcrypt.compare(password, player.password)

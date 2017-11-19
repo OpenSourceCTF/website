@@ -16,7 +16,10 @@ auth.post('/login', body(), (ctx, next) =>
 		}
 
 		if (success) ctx.login(user)
-		else ctx.body.message = 'There was an issue with the authorization credentials supplied.'
+		else {
+			ctx.body.message = 'Invalid credentials supplied.'
+			ctx.status = 401
+		}
 	})(ctx, next)
 )
 
