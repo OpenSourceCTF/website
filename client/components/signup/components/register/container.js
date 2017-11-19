@@ -15,15 +15,16 @@ class RegisterContainer extends Component {
 		gotoLogin: PropTypes.func.isRequired
 	}
 
-	register = async (username, email, password) => {
-		const wasSuccess = await createPlayer(username, email, password)
+	register = (username, email, password) =>
+		createPlayer(username, email, password)
+			.then(res => {
+				initStores()
 
-		if (wasSuccess) {
-			initStores()
+				browserHistory.push('/')
 
-			browserHistory.push('/')
-		}
-	}
+				return res
+			})
+			.catch(err => err.response.data)
 
 	render () {
 		return (

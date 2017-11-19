@@ -11,15 +11,16 @@ class LoginContainer extends Component {
 		gotoRegister: PropTypes.func.isRequired
 	}
 
-	login = async (handle, password) => {
-		const wasSuccess = await login(handle, password)
+	login = (handle, password) =>
+		login(handle, password)
+			.then(res => {
+				initStores()
 
-		if (wasSuccess) {
-			initStores()
+				browserHistory.push('/')
 
-			browserHistory.push('/')
-		}
-	}
+				return res.data
+			})
+			.catch(err => err.response.data)
 
 	render () {
 		return (

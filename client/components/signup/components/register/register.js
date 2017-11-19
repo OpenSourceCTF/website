@@ -1,5 +1,8 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import sleep from 'Modules/sleep'
+
+import Snackbar from 'Components/snackbar/'
 
 import styles from '../../signup.sass'
 
@@ -9,16 +12,23 @@ class Register extends PureComponent {
 		onSubmit: PropTypes.func.isRequired
 	}
 
-	usernameEl = null
-
 	state = {
 		username: '',
 		email: '',
-		password: ''
+		password: '',
+		showErrMsg: false,
+		errMsg: ''
 	}
+
+	usernameEl = null
+	errorIndex = 0
 
 	componentDidMount () {
 		this.usernameEl.focus()
+	}
+
+	hideErrMsg = () => {
+		this.setState({ showErrMsg: false })
 	}
 
 	handleGenericInput = evt => {
@@ -28,14 +38,32 @@ class Register extends PureComponent {
 		this.setState({ [tgt.name]: value })
 	}
 
-	handleSubmit = evt => {
+	handleSubmit = async evt => {
 		evt.preventDefault()
 
 		const { username, email, password } = this.state
 
 		if (!username || !password) return
 
-		this.props.onSubmit(username, email, password)
+		const res = await this.props.onSubmit(username, email, password)
+
+		if (!res.success) {
+			this.setState({
+				showErrMsg: true,
+				errMsg: res.message || 'An unknown error occurred.'
+			}, () => {
+				this.errorIndex++
+
+				const thisIndex = this.errorIndex
+
+				sleep(3000)
+					.then(() => {
+						if (thisIndex !== this.errorIndex) return
+
+						this.setState({ showErrMsg: false })
+					})
+			})
+		}
 	}
 
 	render () {
@@ -90,6 +118,13 @@ class Register extends PureComponent {
 				>
 					I&apos;ve already registered!
 				</span>
+
+				<Snackbar
+					onHide={this.hideErrMsg}
+					open={this.state.showErrMsg}
+					message={this.state.errMsg}
+					type="error"
+				/>
 			</div>
 		)
 	}
