@@ -1,5 +1,8 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import sleep from 'Modules/sleep'
+
+import Snackbar from 'Components/snackbar/'
 
 import styles from '../../signup.sass'
 
@@ -9,15 +12,22 @@ class Login extends PureComponent {
 		gotoRegister: PropTypes.func.isRequired
 	}
 
-	handleEl = null
-
 	state = {
 		handle: '',
-		password: ''
+		password: '',
+		showErrMsg: false,
+		errMsg: ''
 	}
+
+	handleEl = null
+	errorIndex = 0
 
 	componentDidMount () {
 		this.handleEl.focus()
+	}
+
+	hideErrMsg = () => {
+		this.setState({ showErrMsg: false })
 	}
 
 	handleGenericInput = evt => {
@@ -27,12 +37,30 @@ class Login extends PureComponent {
 		this.setState({ [tgt.name]: value })
 	}
 
-	handleSubmit = evt => {
+	handleSubmit = async evt => {
 		evt.preventDefault()
 
 		const { handle, password } = this.state
 
-		this.props.onSubmit(handle, password)
+		const res = await this.props.onSubmit(handle, password)
+
+		if (!res.success) {
+			this.setState({
+				showErrMsg: true,
+				errMsg: res.message || 'An unknown error occurred.'
+			}, () => {
+				this.errorIndex++
+
+				const thisIndex = this.errorIndex
+
+				sleep(3000)
+					.then(() => {
+						if (thisIndex !== this.errorIndex) return
+
+						this.setState({ showErrMsg: false })
+					})
+			})
+		}
 	}
 
 	render () {
@@ -76,8 +104,15 @@ class Login extends PureComponent {
 					onClick={this.props.gotoRegister}
 					className={styles['ctx-switch']}
 				>
-					Register - it&apos;s free!
+					Register &mdash; it&apos;s free!
 				</span>
+
+				<Snackbar
+					onHide={this.hideErrMsg}
+					open={this.state.showErrMsg}
+					message={this.state.errMsg}
+					type="error"
+				/>
 			</div>
 		)
 	}

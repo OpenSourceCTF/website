@@ -1,3 +1,6 @@
+// "pass" in plaintext
+const password = '$2a$10$vcJcMadI89UQoQjcSmgnGejKRryJb2/jAgHrqpm1pTfsBLumSdtSG'
+
 exports.seed = knex =>
 	// Delete all preexisting players
 	knex('player').del()
@@ -7,16 +10,16 @@ exports.seed = knex =>
 				{
 					username: 'Hodor',
 					email: 'wylis@wester.os',
-					password: 'pass' // This is only temporarily plaintext
+					password
 				},
 				{
 					username: 'Jon',
 					email: 'aegon.vi@wester.os',
-					password: 'pass' // This is only temporarily plaintext
+					password
 				},
 				{
 					username: 'Daenarys',
-					password: 'pass' // This is only temporarily plaintext
+					password
 				}
 			])
 		)

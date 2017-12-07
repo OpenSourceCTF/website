@@ -9,6 +9,7 @@ import AddonsRecent from './pages/addons/recent/'
 import AddonsSearch from './pages/addons/search/'
 import Arena from './pages/arena/'
 import Leaderboards from './pages/leaderboards/'
+import Login from './pages/login/'
 import Maps from './pages/maps/'
 import NotFound from './pages/not-found/'
 import Play from './pages/play/'
@@ -17,6 +18,11 @@ import Profile from './pages/profile/'
 const CompleteRouter = () => (
 	<Router history={browserHistory}>
 		<Switch>
+			<Route exact path="/login" component={Login} />
+			<Route exact path="/register">
+				<Redirect to="/login" />
+			</Route>
+
 			<Route exact path="/arena" component={Arena} />
 
 			<Route exact path="/">

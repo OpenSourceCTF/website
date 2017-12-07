@@ -1,31 +1,46 @@
 import Router from 'koa-router'
 import body from 'koa-body'
+import passport from 'koa-passport'
+import checkAuth from '../auth'
 import Player from '../models/player'
 
 const auth = new Router({ prefix: '/api/auth' })
 
-// Login - temporary implementation
-auth.post('/login', body(), async ctx => {
-	const { handle, password } = ctx.request.body
+// Login
+auth.post('/login', body(), (ctx, next) =>
+	passport.authenticate('local', (err, user) => {
+		const success = !err && !!user
 
-	if (!handle || !password) {
 		ctx.body = {
-			success: false
+			success
 		}
 
-		return
-	}
+		if (success) ctx.login(user)
+		else {
+			ctx.body.message = 'Invalid credentials supplied.'
+			ctx.status = 401
+		}
+	})(ctx, next)
+)
 
-	const validAuth = await Player.query()
-		.where('username', handle)
-		.orWhere('email', handle)
-		.andWhere('password', password)
-		.limit(1)
-		.then(([player]) => !!player)
-
+// Intended for retrieving info about user, but can also be used as a simple
+// auth check
+auth.get('/info', checkAuth(), (ctx, next) => {
 	ctx.body = {
-		success: validAuth
+		success: true,
+		info: {
+			username: ctx.state.user.username,
+			email: ctx.state.user.email,
+			lastModifiedUsername: ctx.state.user.last_modified_username,
+			playerCreatedAt: ctx.state.user.created_at
+		}
 	}
+})
+
+// Logout
+auth.get('/logout', checkAuth({ redirect: true }), ctx => {
+	ctx.logout()
+	ctx.redirect('/login')
 })
 
 // Register
@@ -34,8 +49,10 @@ auth.post('/player', body(), ctx => {
 
 	if (!username || !password) {
 		ctx.body = {
-			success: false
+			success: false,
+			message: `Missing required username and/or password field(s).`
 		}
+		ctx.status = 422
 
 		return
 	}
@@ -48,6 +65,9 @@ auth.post('/player', body(), ctx => {
 		.then(player => {
 			console.log(`New player registered: ${player.username}`)
 
+			// Automatically log in the newly registered player
+			ctx.login(player)
+
 			ctx.body = {
 				success: true
 			}
@@ -55,9 +75,13 @@ auth.post('/player', body(), ctx => {
 		.catch(err => {
 			console.log(err)
 
+			// The message we give back to the client here is something of an
+			// assumption in the absence of more easily parseable errors
 			ctx.body = {
-				success: false
+				success: false,
+				message: `Username${email ? ' and/or email address ' : ' '}already in use.`
 			}
+			ctx.status = 409
 		})
 })
 

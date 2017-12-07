@@ -8,7 +8,7 @@ exports.up = knex =>
 			table.string('username', 20).unique().notNullable()
 			table.dateTime('last_modified_username')
 			table.string('email', 254).unique()
-			table.string('password', 100).notNullable() // TODO update this length to reflect pw crypto
+			table.string('password', 60).notNullable() // Length of backend crypto salt/hash
 		})
 		.createTable('map', table => {
 			table.increments('id').primary().notNullable()

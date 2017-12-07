@@ -1,29 +1,26 @@
 import React, { Component } from 'react'
-import { observer, inject } from 'mobx-react'
 import PropTypes from 'prop-types'
+import browserHistory from 'BrowserHistory'
 import { login } from 'API/auth'
+import { init as initStores } from '../../../../stores/'
 
 import Login from './login'
 
-@inject('matchmaking', 'player')
-@observer
 class LoginContainer extends Component {
 	static propTypes = {
-		matchmaking: PropTypes.object.isRequired,
-		player: PropTypes.object.isRequired,
 		gotoRegister: PropTypes.func.isRequired
 	}
 
-	// This implementation is temporary
-	login = async (handle, password) => {
-		const wasSuccess = await login(handle, password)
+	login = (handle, password) =>
+		login(handle, password)
+			.then(res => {
+				initStores()
 
-		if (wasSuccess) {
-			// Note that both of these are expecting usernames, not emails
-			this.props.player.setPlayerDetails(handle)
-			this.props.matchmaking.addPlayerToLobby(handle)
-		}
-	}
+				browserHistory.push('/')
+
+				return res.data
+			})
+			.catch(err => err.response.data)
 
 	render () {
 		return (
