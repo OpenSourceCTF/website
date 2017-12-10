@@ -18,7 +18,7 @@ class PrimaryNavContainer extends Component {
 
 		return (
 			<PrimaryNav
-				lobbyIsActive={!!matchmaking.othersInLobby.length}
+				lobbyIsActive={matchmaking.lobbyIsActive}
 				items={this.props.items}
 				minimal={this.props.minimal}
 			/>

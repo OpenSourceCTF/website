@@ -1,0 +1,27 @@
+version: "2"
+
+services:
+  web:
+    image: node:9
+    volumes:
+      - ../:/usr/src/website
+    working_dir: /usr/src/website
+    command: sh -c 'npm run server-dev'
+    ports:
+      - '${HOST_WEB_PORT}:${WEB_SERVER_PORT}'
+    depends_on:
+      - db
+  db:
+    image: postgres:10
+    restart: always
+    ports:
+      - '${HOST_DB_PORT}:5432'
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_DB}
+
+volumes:
+  postgres:

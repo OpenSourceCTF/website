@@ -38,7 +38,7 @@ const Nav = ({ lobbyIsActive, items, minimal = false }) => {
 	})
 
 	const renderedUserArea = minimal ? null : (
-		<div>LOGIN/etc</div>
+		<a href="/api/auth/logout">Logout</a>
 	)
 
 	return (

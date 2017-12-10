@@ -30,6 +30,7 @@ if (DEVMODE) window._MOBX_ = stores
 const App = () => (
 	<div>
 		<Helmet title={cfg.get('APP_NAME')} />
+
 		<Provider {...stores} >
 			<Router />
 		</Provider>
