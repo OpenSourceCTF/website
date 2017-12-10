@@ -8,19 +8,34 @@ Browser support is the last 2 versions of modern browsers only (Chrome, Firefox,
 
 # Prerequisites
 
-- Node >= 8.x
-- npm >= 5.x
+- Docker
+- Web client *
+
+*: For the time being the web client will need to be linked as follows:
+
+1. In client repo: `npm link`
+2. In website (this) repo: `npm link osctf-web-client`
 
 ## Quick Guide
 
+Install npm dependencies: `npm i`. Note that for some modules with native binaries you may need to install/(re)build them from inside the relevant Docker container.
+
+Link the web client per the prerequisite instructions.
+
 Copy `.env.example` to `.env` and edit as desired.
 
-In production, start the server with `npm run start` on by default port 5000.
+Run the latest Knex DB migrations: `knex migrate:latest`, and optionally seed: `knex seed:run`
 
-In development, start the server with `npm run start-dev`. This server will reload on change and as well as run alongside Webpack watch including HMR on the server port plus one. So, if your server port is 5000, you can access the dev site at `http://localhost:5001`. Note that with HMR you will see a FOUC on page load. Not to worry, this won't happen during production.
+In development, start the server with `npm run start-dev`. This server will reload on change as well as run alongside Webpack watch including HMR. Note that with HMR you will see a FOUC on page load. Not to worry, this won't happen during production.
 
-The build task can be run with `npm run build`.
+In production, start the server with `npm run start` on by default port 5000. Note that this will first run the build task.
+
+The build task can be manually run with `npm run build`.
 
 Tests can be run with `npm run test`. This will also output a coverage report at `./coverage/`.
 
 You can run `npm run build-stats` to generate statistics regarding the build.
+
+# Migrations
+
+We use the Knex library for migrations. You may find working with the backend easier if you install the library globally, like so: `npm i -g knex`.

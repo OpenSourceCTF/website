@@ -1,11 +1,8 @@
 import { observable, computed, action, runInAction } from 'mobx'
-import axios from 'axios'
+import { getServers } from 'API/game'
 
 class MatchmakingStore {
 	constructor () {
-		// Fetch list of game servers from website server
-		this.getServers()
-
 		// Get last used matchmaking server from user's browser
 		const previousChosenServer = localStorage.getItem('matchmaking_server')
 		if (previousChosenServer) this.setServer(previousChosenServer)
@@ -14,11 +11,16 @@ class MatchmakingStore {
 		;['teoretyczny', 'DwarfFortres', 'ElectroBall'].forEach(this.addPlayerToLobby)
 	}
 
+	init () {
+		// Fetch list of game servers/regions from website server
+		this.getServers()
+	}
+
 	@observable servers = []
 	@observable chosenServer = ''
 	@observable publicGame = true
 	@observable publicLobby = false
-	@observable othersInLobby = [] // 'team1', 'team2', or 'spectators'
+	@observable playersInLobby = [] // Expected groups: 'team1', 'team2', 'spectators'
 
 	@computed get serversSortedByPing () {
 		return this.servers.sort((a, b) => {
@@ -29,8 +31,14 @@ class MatchmakingStore {
 		})
 	}
 
+	@computed get lobbyIsActive () {
+		return this.playersInLobby.length > 1
+	}
+
 	@action getServers = async () => {
-		const servers = await axios.get('/api/servers').then(res => res.data.servers)
+		const servers = await getServers()
+
+		if (!servers) return
 
 		runInAction(() => {
 			this.servers = servers
@@ -61,26 +69,26 @@ class MatchmakingStore {
 	}
 
 	@action addPlayerToLobby = player => {
-		this.othersInLobby.push({
+		this.playersInLobby.push({
 			name: player,
 			group: 'spectators'
 		})
 	}
 
 	@action changePlayerLobbyGroup = (playerName, group) => {
-		const playerIndex = this.othersInLobby.findIndex(player => player.name === playerName)
+		const playerIndex = this.playersInLobby.findIndex(player => player.name === playerName)
 
-		this.othersInLobby[playerIndex].group = group
+		this.playersInLobby[playerIndex].group = group
 	}
 
 	@action removePlayerFromLobby = playerName => {
-		const playerIndex = this.othersInLobby.findIndex(player => player.name === playerName)
+		const playerIndex = this.playersInLobby.findIndex(player => player.name === playerName)
 
-		this.othersInLobby.splice(playerIndex, 1)
+		this.playersInLobby.splice(playerIndex, 1)
 	}
 
 	@action purgeLobby = () => {
-		this.othersInLobby = []
+		this.playersInLobby = []
 	}
 }
 

@@ -5,6 +5,11 @@ import classNames from 'classnames'
 import styles from './chatbox.sass'
 
 class Chatbox extends Component {
+	static propTypes = {
+		messages: PropTypes.arrayOf(PropTypes.object).isRequired,
+		sendMessage: PropTypes.func.isRequired
+	}
+
 	state = {
 		formMessage: ''
 	}
@@ -86,11 +91,6 @@ class Chatbox extends Component {
 			</div>
 		)
 	}
-}
-
-Chatbox.propTypes = {
-	messages: PropTypes.arrayOf(PropTypes.object).isRequired,
-	sendMessage: PropTypes.func.isRequired
 }
 
 export default Chatbox

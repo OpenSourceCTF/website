@@ -1,6 +1,7 @@
 const config = new Map()
 
 config.set('APP_NAME', 'OS CTF')
+config.set('APP_NAME_ABBR', 'osctf')
 
 // browserlist shared by Webpack/Autoprefixer and Babel
 config.set('BROWSER_SUPPORT', [

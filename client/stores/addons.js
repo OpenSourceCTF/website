@@ -2,7 +2,7 @@ import { observable, computed, action, runInAction } from 'mobx'
 import axios from 'axios'
 
 class AddonsStore {
-	constructor () {
+	init () {
 		// Fetch list of addons from website server
 		this.getAddons()
 	}
@@ -19,6 +19,8 @@ class AddonsStore {
 
 	@action getAddons = async () => {
 		const addons = await axios.get('/api/addons').then(res => res.data.addons)
+
+		if (!addons) return
 
 		runInAction(() => {
 			this.addons = addons

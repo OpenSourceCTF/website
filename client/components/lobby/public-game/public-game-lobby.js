@@ -1,13 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
 import styles from './public-game-lobby.sass'
 
-const PublicGameLobby = ({ players, lobbyIsPublic }) => {
-	const renderedPlayers = players.map(player => (
-		<li key={player}>{player}</li>
-	))
+const PublicGameLobby = ({ self, players, lobbyIsPublic }) => {
+	const renderedPlayers = players.map(player => {
+		const classes = classNames(styles['player'], {
+			[styles['player--highlight']]: player === self
+		})
 
+		return (
+			<li
+				key={player}
+				className={classes}
+			>
+				{player}
+			</li>
+		)
+	})
 	return (
 		<div>
 			<header className={styles['header']}>
@@ -18,7 +29,7 @@ const PublicGameLobby = ({ players, lobbyIsPublic }) => {
 					</span>
 				</h2>
 			</header>
-			<ul className={styles['list']}>
+			<ul>
 				{renderedPlayers}
 			</ul>
 		</div>
@@ -26,6 +37,7 @@ const PublicGameLobby = ({ players, lobbyIsPublic }) => {
 }
 
 PublicGameLobby.propTypes = {
+	self: PropTypes.string.isRequired,
 	players: PropTypes.arrayOf(PropTypes.string).isRequired,
 	lobbyIsPublic: PropTypes.bool.isRequired
 }

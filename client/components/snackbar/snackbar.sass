@@ -1,0 +1,29 @@
+@import '~GlobalStyleVars'
+
+.snackbar
+	position: fixed
+	left: 50%
+	bottom: $baseline-spacing
+	transform: translate(-50%, calc(100% + #{$baseline-spacing})) scale(0)
+	padding: ($baseline-spacing / 2) $baseline-spacing
+	border-radius: 2px
+	transition: transform .25s
+
+	&--info
+		background: $color-primary
+		color: white
+
+	&--error
+		background: rgb(255, 148, 148)
+
+	&--active
+		transform: translate(-50%, 0) scale(1)
+
+.exit
+	display: inline-block
+	transform: translateY(2px)
+	margin: 0 0 0 5px
+	line-height: 0
+	font-size: 30px
+	font-weight: bold
+	cursor: pointer
