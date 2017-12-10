@@ -12,6 +12,8 @@ exports.up = knex =>
 		})
 		.createTable('map', table => {
 			table.increments('id').primary().notNullable()
+			table.dateTime('created_at').defaultTo(knex.fn.now()).notNullable()
+			table.dateTime('last_active').defaultTo(knex.fn.now()).notNullable()
 			table.string('name', 20).notNullable()
 			table.string('description', 100)
 			table.text('filename').notNullable()
