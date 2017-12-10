@@ -21,7 +21,7 @@ module.exports = {
 				['env', {
 					// Target the minimum Node version as defined in package.json engines.node key
 					targets: {
-						node: 8
+						node: 9
 					}
 				}]
 			]
