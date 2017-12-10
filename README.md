@@ -32,6 +32,8 @@ In production, start the server with `npm run start` on by default port 5000. No
 
 The build task can be manually run with `npm run build`.
 
+Tests can be run with `npm run test`. This will also output a coverage report at `./coverage/`.
+
 You can run `npm run build-stats` to generate statistics regarding the build.
 
 # Migrations

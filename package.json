@@ -6,7 +6,7 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/OpenSourceTagpro/website.git"
+		"url": "https://github.com/OpenSourceCTF/website.git"
 	},
 	"engines": {
 		"node": ">=9.0.0"
@@ -18,12 +18,12 @@
 		"server-dev": "nodemon -L --watch server/ --experimental-modules -e js,mjs,json,pug server/",
 		"build": "webpack --define process.env.NODE_ENV=\"production\" --config build/webpack.production.config.js",
 		"build-dev": "webpack-dev-server --config build/webpack.development.config.js",
-		"build-stats": "webpack --define process.env.NODE_ENV=\"production\" --config build/webpack.production.config.js --json > stats.json"
+		"build-stats": "webpack --define process.env.NODE_ENV=\"production\" --config build/webpack.production.config.js --json > stats.json",
+		"test": "jest --coverage client/tests/"
 	},
 	"dependencies": {
 		"axios": "^0.17.0",
 		"babel-polyfill": "^7.0.0-beta.3",
-		"babel-preset-react": "^7.0.0-beta.3",
 		"bcrypt": "^1.0.3",
 		"classnames": "^2.2.5",
 		"dotenv": "^4.0.0",
@@ -46,10 +46,10 @@
 		"pg": "^7.4.0",
 		"prop-types": "^15.6.0",
 		"pug": "^2.0.0-rc.4",
-		"react": "^16.1.0",
+		"react": "^16.2.0",
 		"react-dnd": "^2.5.4",
 		"react-dnd-html5-backend": "^2.5.4",
-		"react-dom": "^16.1.0",
+		"react-dom": "^16.2.0",
 		"react-helmet": "^5.2.0",
 		"react-router-dom": "^4.2.2",
 		"sanitize.css": "^5.0.0"
@@ -58,6 +58,7 @@
 		"autoprefixer": "^7.1.6",
 		"babel-core": "^7.0.0-beta.3",
 		"babel-eslint": "^8.0.2",
+		"babel-jest": "^21.3.0-beta.13",
 		"babel-loader": "^7.1.2",
 		"babel-plugin-syntax-dynamic-import": "^7.0.0-beta.3",
 		"babel-plugin-transform-async-to-generator": "^7.0.0-beta.3",
@@ -69,6 +70,7 @@
 		"babel-plugin-transform-runtime": "^7.0.0-beta.3",
 		"babel-preset-babili": "^0.1.4",
 		"babel-preset-env": "^1.6.1",
+		"babel-preset-react": "^7.0.0-beta.3",
 		"case-sensitive-paths-webpack-plugin": "^2.1.1",
 		"css-loader": "^0.28.7",
 		"csso-loader": "^0.3.1",
@@ -83,6 +85,7 @@
 		"eslint-plugin-security": "^1.4.0",
 		"eslint-plugin-standard": "^3.0.1",
 		"extract-text-webpack-plugin": "^3.0.2",
+		"jest": "^21.2.1",
 		"lodash.merge": "^4.6.0",
 		"node-sass": "^4.6.0",
 		"nodemon": "^1.12.1",
@@ -92,5 +95,13 @@
 		"style-loader": "^0.19.0",
 		"webpack": "^3.8.1",
 		"webpack-dev-server": "^2.9.4"
+	},
+	"jest": {
+		"moduleNameMapper": {
+			"^Components(.*)$": "<rootDir>/client/components$1",
+			"^Modules(.*)$": "<rootDir>/client/modules$1",
+			"^API(.*)$": "<rootDir>/client/api$1",
+			"^BrowserHistory(.*)$": "<rootDir>/client/browser-history$1"
+		}
 	}
 }

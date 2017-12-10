@@ -14,6 +14,19 @@ module.exports = {
 		}],
 		'react'
 	],
+	// Jest-specific config
+	env: {
+		test: {
+			presets: [
+				['env', {
+					// Target the minimum Node version as defined in package.json engines.node key
+					targets: {
+						node: 9
+					}
+				}]
+			]
+		}
+	},
 	// These are plugins for JS standard proposals that aren't yet fully
 	// standardised but are well worth using now anyway. Anything that's already
 	// fully standardised is covered by the env preset above
