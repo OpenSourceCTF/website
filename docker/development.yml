@@ -22,6 +22,9 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASS}
       POSTGRES_DB: ${DB_DB}
+  engine:
+    image: gcc:latest
+    ports: '-9998:9999'
 
 volumes:
   postgres:
