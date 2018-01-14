@@ -1,4 +1,4 @@
-version: "2"
+version: '2'
 
 services:
   web:
@@ -23,8 +23,9 @@ services:
       POSTGRES_PASSWORD: ${DB_PASS}
       POSTGRES_DB: ${DB_DB}
   engine:
-    image: gcc:latest
-    ports: '-9998:9999'
+    build: ./images/engine/
+    ports:
+      - '9999:5000'
 
 volumes:
   postgres:

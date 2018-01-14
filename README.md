@@ -8,7 +8,9 @@ Browser support is the last 2 versions of modern browsers only (Chrome, Firefox,
 
 # Prerequisites
 
+- Node (& npm)
 - Docker
+- Docker Compose
 - Web client *
 
 *: For the time being the web client will need to be linked as follows:
